@@ -1,15 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import UserForm from './components/Cadastro/Cadastro'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Menu from './components/Menu'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+function App() {
   return (
     <div className="App">
-      <h1>Desafio Nova </h1>
+      <Router>
+      <Menu/>
+      <UserForm/>
+      </Router>
     </div>
+   
   )
 }
 
