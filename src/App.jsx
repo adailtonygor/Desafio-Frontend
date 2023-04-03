@@ -1,16 +1,13 @@
-import UserForm from './components/Cadastro/Cadastro'
-import { BrowserRouter as Router } from 'react-router-dom'
-import Menu from './components/Menu'
+import React from 'react'
 import './App.css'
+import RoutesApp from './components/Routes/Routes'
 
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-      <Menu/>
-      <UserForm/>
-      </Router>
+    <div>
+
+      <RoutesApp/>
     </div>
    
   )

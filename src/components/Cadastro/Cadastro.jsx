@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, Box } from '@material-ui/core';
+import {Link} from 'react-router-dom';
 
 
 
-
-function App() {
+function Cadastro() {
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [endereco, setEndereco] = useState('');
@@ -44,6 +44,7 @@ function App() {
       complemento,
       dataNascimento,
     });
+    <Link to="/">Voltar para Home</Link>
   };
 
   return (
@@ -117,4 +118,4 @@ function App() {
   );
 }
 
-export default App;
+export default Cadastro;
