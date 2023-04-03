@@ -26,4 +26,4 @@ para navegação.
 
 
 
-![MicrosoftTeams-image](https://user-images.githubusercontent.com/105685493/227618525-98bee76b-0f5b-42f9-8d4e-7241f2101668.png)
+![MicrosoftTeams-image (1)](https://user-images.githubusercontent.com/105685493/228348076-b5efd310-1af2-41d4-a8dc-e535a70d3773.png)
