@@ -11,8 +11,8 @@ function NavBar() {
                   Desafio Nova
                 </Typography>
                 <Button color="inherit" component={Link} to="/cadastro">Cadastro</Button>
-                <Button color="inherit" component={Link} to="/UserList">Usuário</Button>
-
+                <Button color="inherit" component={Link} to="/UserTable">Usuário</Button>
+              
               </Toolbar>
             </AppBar>
              
