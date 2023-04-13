@@ -39,9 +39,9 @@
     {
       "id": 6,
       "name": "Ingrid",
-      "cpf": "123.456.333-12",
+      "cpf": "123.456.333-11",
       "endereco": "Rua T63 quadra 100 lote 23",
-      "datadenascimento": "02/12/2002",
+      "datadenascimento": "02/12/2001",
       "sexo": "Feminino"
     },
     {
@@ -69,35 +69,11 @@
       "sexo": "Masculino"
     },
     {
-      "id": 10,
-      "name": "Rafael",
-      "cpf": "123.456.568-11",
-      "endereco": "Rua T55 quadra 23 lote 70",
-      "datadenascimento": "16/02/2002",
-      "sexo": "Masculino"
-    },
-    {
-      "id": 11,
-      "name": "Pabline",
-      "cpf": "003.458.568-11",
-      "endereco": "Rua T65 quadra 285 lote 70",
-      "datadenascimento": "16/02/1999",
-      "sexo": "Feminino"
-    },
-    {
       "sexo": "Masculino",
       "datadenascimento": "2000-07-11",
       "endereco": "Rua j 14 ",
       "cpf": "703.064.721-12",
-      "name": "Leanne ",
-      "id": 12
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11",
-      "endereco": "Rua j 14 ",
-      "cpf": "703.064.721-12",
-      "name": "ADAILTON SANTANA",
+      "name": "ADAILTON ",
       "id": 13
     },
     {
@@ -105,7 +81,7 @@
       "datadenascimento": "2000-07-11",
       "endereco": "Rua j 14 ",
       "cpf": "703.064.721-12",
-      "name": "ADAILTON SANTANA",
+      "name": "ADAILTON SANTANA.",
       "id": 14
     },
     {
@@ -118,15 +94,7 @@
     },
     {
       "sexo": "Masculino",
-      "datadenascimento": "2000-07-11T03:00:00.000Z",
-      "endereco": "Rua t 34 quadra 33 lote 20 ",
-      "cpf": "703.064.721-12",
-      "name": "ADAILTON SANTANA",
-      "id": 16
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11T03:00:00.000Z",
+      "datadenascimento": "2000-07-11",
       "endereco": "Rua t 34 quadra 33 lote 20 ",
       "cpf": "703.064.721-12",
       "name": "ADAILTON SANTANA",
@@ -134,15 +102,7 @@
     },
     {
       "sexo": "Masculino",
-      "datadenascimento": "2000-07-11T03:00:00.000Z",
-      "endereco": "Rua t 34 quadra 33 lote 20 ",
-      "cpf": "703.064.721-12",
-      "name": "ADAILTON SANTANA",
-      "id": 18
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11T03:00:00.000Z",
+      "datadenascimento": "2000-07-11",
       "endereco": "Rua t 34 quadra 33 lote 20 ",
       "cpf": "703.064.721-12",
       "name": "Pablo",
@@ -154,7 +114,7 @@
       "endereco": "Rua j 14 ",
       "cpf": "703.064.721-12",
       "name": "ADAILTON SANTANA",
-      "id": 20
+      "id": 21
     }
   ]
 }

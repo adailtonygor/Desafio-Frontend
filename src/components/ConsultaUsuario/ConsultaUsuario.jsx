@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Table,
     TableBody,
@@ -23,6 +23,7 @@ const UserTable = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -32,8 +33,8 @@ const UserTable = () => {
         fetchUsers();
     }, []);
 
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:3000/users/${id}`);
+    const handleDelete = async (id) => {
+        await axios.delete(`http://localhost:3000/users/${id}`);
         const excluirUsuario = users.filter((usuario) => usuario.id !== id);
         setUsers([...excluirUsuario]);
         //console.log(`Delete user with id ${id}`);
@@ -49,7 +50,7 @@ const UserTable = () => {
             const updatedUser = { ...editingUser };
             const result = await axios.put(
                 `http://localhost:3000/users/${editingUser.id}`,
-                updatedUser
+                updatedUser,
             );
             console.log(result);
             setEditingUser(null);
@@ -57,11 +58,12 @@ const UserTable = () => {
             setUsers((prevUsers) => {
                 const updatedUsers = [...prevUsers];
                 const userIndex = prevUsers.findIndex(
-                    (user) => user.id === editingUser.id
+                    (user) => user.id === editingUser.id,
                 );
                 updatedUsers[userIndex] = updatedUser;
                 return updatedUsers;
             });
+            
         } catch (error) {
             console.log(error);
         }
@@ -80,7 +82,10 @@ const UserTable = () => {
         }));
     };
     const handleChangePage = (_event, newPage) => {
-        setPage(newPage);
+        const maxPage = Math.ceil(users.length / rowsPerPage) - 1;
+        if (newPage >= 0 && newPage <= maxPage) {
+          setPage(newPage);
+        }
     };
 
     const handleChangeRowsPerPage = (event) => {
@@ -90,6 +95,7 @@ const UserTable = () => {
 
     return (
         <div>
+            
             <TableContainer>
                 <Table>
                     <TableHead>
@@ -106,7 +112,7 @@ const UserTable = () => {
                         {users
                             .slice(
                                 page * rowsPerPage,
-                                page * rowsPerPage + rowsPerPage
+                                page * rowsPerPage + rowsPerPage,
                             )
                             .map((user) => (
                                 <TableRow key={user.id}>
@@ -116,7 +122,7 @@ const UserTable = () => {
                                     <TableCell>{user.endereco}</TableCell>
                                     <TableCell>
                                         {new Date(
-                                            user.datadenascimento
+                                            user.datadenascimento,
                                         ).toLocaleDateString()}
                                     </TableCell>
                                     <TableCell>{user.sexo}</TableCell>
@@ -151,6 +157,7 @@ const UserTable = () => {
                     </TableBody>
                 </Table>
                 <TablePagination
+                labelRowsPerPage="Linhas por página"
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
                     count={users.length}
@@ -158,11 +165,12 @@ const UserTable = () => {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
+                    
                 />
             </TableContainer>
 
             <Dialog open={openDialog} onClose={handleCancel}>
-                <DialogTitle>Editar Usuário {editingUser?.id}</DialogTitle>
+                <DialogTitle>Editar Usuário </DialogTitle>
                 <DialogContent>
                     <TextField
                         label="Name"
@@ -209,6 +217,7 @@ const UserTable = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
+           
         </div>
     );
 };

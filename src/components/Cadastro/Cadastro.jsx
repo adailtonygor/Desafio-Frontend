@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useForm } from 'react-hook-form';
 import {
     TextField,
@@ -8,10 +6,8 @@ import {
     Radio,
     FormControlLabel,
     Grid,
-    Snackbar,
     FormHelperText,
 } from '@material-ui/core';
-import { Alert } from '@mui/material';
 import Axios from 'axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -38,20 +34,6 @@ const Cadastro = () => {
         resolver: yupResolver(schema),
     });
 
-    const [open, setOpen] = useState(false);
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
     const onSubmit = async (data) => {
         try {
             const response = await Axios.post(
@@ -59,12 +41,11 @@ const Cadastro = () => {
                 data,
             );
             console.log(response.data);
-            handleOpen();
-
+        
            navigate("/UserTable")
         } catch (error) {
             console.log(error);
-            handleOpen();
+            
         }
     };
 
@@ -153,11 +134,6 @@ const Cadastro = () => {
                     </Button>
                 </Grid>
             </Grid>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success">
-                    Cadastro realizado com sucesso!
-                </Alert>
-            </Snackbar>
         </form>
     );
 };
