@@ -22,12 +22,14 @@ O desenvolvimento deverá ser em React
 com react-hook-form para validações de formulários, Axios para integrações e react-router
 para navegação.
 
+Para iniciar o projeto realize o comando 'npm run dev'
+Estou utilizando uma Api Fake nesse Desafio. Para iniciar utilize o comando 'json-server --watch db.json'
 
 
+![image](https://user-images.githubusercontent.com/105685493/231577148-70eca82d-3cea-4942-bc48-dcf77af00f73.png)
 
 
-![image](https://user-images.githubusercontent.com/105685493/229608796-08e22238-094b-4542-8784-c8fb0a3202c5.png)
+![image](https://user-images.githubusercontent.com/105685493/231577244-00c04fdf-ca65-4ff0-9a38-fe1dd0e67f03.png)
 
-![image](https://user-images.githubusercontent.com/105685493/229894399-700b5a37-0a9d-4709-87c0-dca8de6f7ffb.png)
 
 
