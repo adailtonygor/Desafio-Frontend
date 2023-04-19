@@ -1,19 +1,34 @@
 /* eslint-disable react/no-unknown-property */
 import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Button } from '@mui/material';
+import { useState } from 'react';
+import { AppBar, Toolbar } from '@mui/material';
 
 function NavBar() {
+    const [active, setActive] = useState(false);
+
+    const handleClick = () => {
+        setActive(true);
+    };
+
+    const handleBlur = () => {
+        setActive(false);
+    };
+
+    
     return (
         <AppBar position="static">
             <Toolbar sx={{ justifyContent: 'space-between' }}>
                 <NavLink
                     to="/"
+                    onClick={handleClick}
+                    onBlur={handleBlur}
                     style={({ isActive, isPending }) => {
                         return {
                             fontWeight: isActive ? 'Bold' : '',
                             color: isPending ? 'white' : 'white',
                             textDecoration: 'none',
+                            margin: active ? '10px' : '0',
+                            transition: 'margin 0.1s ease-in-out',
                         };
                     }}
                 >
@@ -21,12 +36,38 @@ function NavBar() {
                 </NavLink>
 
                 <div sx={{ display: 'flex' }}>
-                    <Button color="inherit" component={Link} to="/cadastro">
+                    <NavLink
+                        to="/cadastro"
+                        onClick={handleClick}
+                        onBlur={handleBlur}
+                        style={({ isActive, isPending }) => {
+                            return {
+                                fontWeight: isActive ? 'Bold' : '',
+                                color: isPending ? 'white' : 'white',
+                                textDecoration: 'none',
+                                margin: '0 10px',
+                                    
+                            };
+                        }}
+                    >
                         Cadastro
-                    </Button>
-                    <Button color="inherit" component={Link} to="/UserTable">
+                    </NavLink>
+                    <NavLink
+                        to="/consultarUsuario"
+                        onClick={handleClick}
+                        onBlur={handleBlur}
+                        style={({ isActive, isPending }) => {
+                            return {
+                                fontWeight: isActive ? 'Bold' : '',
+                                color: isPending ? 'white' : 'white',
+                                textDecoration: 'none',  
+                                margin: active ? '5px' : '0',
+                                transition: 'margin 0.1s ease-in-out',
+                            };
+                        }}
+                    >
                         Usuário
-                    </Button>
+                    </NavLink>
                 </div>
             </Toolbar>
         </AppBar>

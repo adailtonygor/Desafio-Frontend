@@ -1,35 +1,33 @@
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Cadastro from '../Cadastro/Cadastro'
-import Root from "../Root";
-import UserTable from "../ConsultaUsuario/ConsultaUsuario";
+import Cadastro from '../Cadastro/Cadastro';
+import Root from '../Root';
+import ConsultarUsuario from '../ConsultarUsuario/ConsultarUsuario';
 
-function Index() {
-  return (
-    <div style={{ color: "black", padding: "40px", textAlign: "center" }}>
-      <h1>Bem-vindo ao Desafio Nova</h1>
-      <p>Realize o cadastro do usuário para começar!</p>
-    </div>
-  );
+function PaginaInicial() {
+    return (
+        <div style={{ color: 'black', padding: '40px', textAlign: 'center' }}>
+            <h1>Bem-vindo ao Desafio Nova</h1>
+            <p>Realize o cadastro do usuário para começar!</p>
+        </div>
+    );
 }
 
-
-function RoutesApp()  {
+function RoutesApp() {
     return (
         <BrowserRouter>
-
             <Routes>
-              <Route path="/" element={<Root/>} >
-                <Route index element={ <Index />}/>
-                <Route path="/cadastro" element={<Cadastro />} />
-                <Route path="UserTable" element={<UserTable/>} />
-
-              </Route>
-               
+                <Route path="/" element={<Root />}>
+                    <Route index element={<PaginaInicial />} />
+                    <Route path="/cadastro" element={<Cadastro />} />
+                    <Route
+                        path="/consultarUsuario"
+                        element={<ConsultarUsuario />}
+                    />
+                </Route>
             </Routes>
-
         </BrowserRouter>
-    )
+    );
 }
 
-export default RoutesApp
+export default RoutesApp;

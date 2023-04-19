@@ -14,17 +14,21 @@ import {
     DialogContent,
     DialogActions,
     TablePagination,
+    Snackbar,
+    MenuItem,
 } from '@material-ui/core';
 import axios from 'axios';
 
-const UserTable = () => {
+const ConsultarUsuario = () => {
     const [users, setUsers] = useState([]);
     const [editingUser, setEditingUser] = useState(null);
     const [openDialog, setOpenDialog] = useState(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    
+    const [showMessage, setShowMessage] = useState(false);
+    const [formSexo, setFormSexo] = useState({ sexo: '' });
 
+    
     useEffect(() => {
         const fetchUsers = async () => {
             const result = await axios.get('http://localhost:3000/users/');
@@ -34,10 +38,15 @@ const UserTable = () => {
     }, []);
 
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:3000/users/${id}`);
-        const excluirUsuario = users.filter((usuario) => usuario.id !== id);
-        setUsers([...excluirUsuario]);
-        //console.log(`Delete user with id ${id}`);
+        const confirmed = window.confirm(
+            'Tem certeza que deseja excluir este usuário?',
+        );
+        if (confirmed) {
+            await axios.delete(`http://localhost:3000/users/${id}`);
+            const excluirUsuario = users.filter((usuario) => usuario.id !== id);
+            setUsers([...excluirUsuario]);
+            //console.log(`Delete user with id ${id}`);
+        }
     };
     const handleEdit = (id) => {
         const userToEdit = users.find((user) => user.id === id);
@@ -53,6 +62,7 @@ const UserTable = () => {
                 updatedUser,
             );
             console.log(result);
+            setShowMessage(true);
             setEditingUser(null);
             setOpenDialog(false);
             setUsers((prevUsers) => {
@@ -63,7 +73,6 @@ const UserTable = () => {
                 updatedUsers[userIndex] = updatedUser;
                 return updatedUsers;
             });
-            
         } catch (error) {
             console.log(error);
         }
@@ -76,6 +85,7 @@ const UserTable = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
+        setFormSexo((prevFormSexo) => ({ ...prevFormSexo, [name]: value }));
         setEditingUser((prevEditingUser) => ({
             ...prevEditingUser,
             [name]: value,
@@ -84,7 +94,7 @@ const UserTable = () => {
     const handleChangePage = (_event, newPage) => {
         const maxPage = Math.ceil(users.length / rowsPerPage) - 1;
         if (newPage >= 0 && newPage <= maxPage) {
-          setPage(newPage);
+            setPage(newPage);
         }
     };
 
@@ -95,7 +105,6 @@ const UserTable = () => {
 
     return (
         <div>
-            
             <TableContainer>
                 <Table>
                     <TableHead>
@@ -117,13 +126,13 @@ const UserTable = () => {
                             .map((user) => (
                                 <TableRow key={user.id}>
                                     <TableCell>{user.id}</TableCell>
-                                    <TableCell>{user.name}</TableCell>
+                                    <TableCell>{user.nome}</TableCell>
                                     <TableCell>{user.cpf}</TableCell>
                                     <TableCell>{user.endereco}</TableCell>
                                     <TableCell>
                                         {new Date(
-                                            user.datadenascimento,
-                                        ).toLocaleDateString()}
+                                            user.nascimento,
+                                        ).toLocaleDateString('pt-BR')}
                                     </TableCell>
                                     <TableCell>{user.sexo}</TableCell>
                                     <TableCell>
@@ -157,7 +166,10 @@ const UserTable = () => {
                     </TableBody>
                 </Table>
                 <TablePagination
-                labelRowsPerPage="Linhas por página"
+                    labelRowsPerPage="Linhas por página"
+                    labelDisplayedRows={({ from, to, count }) =>
+                        `${from}-${to} de ${count}`
+                    }
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
                     count={users.length}
@@ -165,22 +177,29 @@ const UserTable = () => {
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
-                    
                 />
             </TableContainer>
 
             <Dialog open={openDialog} onClose={handleCancel}>
-                <DialogTitle>Editar Usuário </DialogTitle>
-                <DialogContent>
+                <DialogTitle
+                    style={{
+                        color: 'white',
+                        textAlign: 'center',
+                        backgroundColor: '#1565c0',
+                    }}
+                >
+                    Editar Usuário{' '}
+                </DialogTitle>
+                <DialogContent style={{ fontSize: '30px', lineHeight: '3em' }}>
                     <TextField
-                        label="Name"
-                        name="name"
-                        value={editingUser?.name}
+                        label="Nome"
+                        name="nome"
+                        value={editingUser?.nome}
                         onChange={handleInputChange}
                         fullWidth
                     />
                     <TextField
-                        label="cpf"
+                        label="CPF"
                         name="cpf"
                         value={editingUser?.cpf}
                         onChange={handleInputChange}
@@ -195,31 +214,55 @@ const UserTable = () => {
                     />
                     <TextField
                         label="Data de nascimento"
-                        name="datadenascimento"
-                        value={editingUser?.datadenascimento}
+                        name="nascimento"
+                        value={editingUser?.nascimento}
                         onChange={handleInputChange}
                         fullWidth
+                        //type='date'
+                        //InputLabelProps={{
+                        //  shrink: true,
+                        //  }}
                     />
                     <TextField
+                        select
                         label="Sexo"
                         name="sexo"
-                        value={editingUser?.sexo}
+                        value={formSexo?.sexo}
                         onChange={handleInputChange}
                         fullWidth
-                    />
+                    >
+                        <MenuItem value="Masculino">Masculino</MenuItem>
+                        <MenuItem value="Feminino">Feminino</MenuItem>
+                    </TextField>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCancel} color="secondary">
+                    <Button
+                        onClick={handleCancel}
+                        variant="outlined"
+                        color="secondary"
+                    >
                         Cancel
                     </Button>
-                    <Button onClick={handleSave} color="primary">
+                    <Button
+                        id="btn-success"
+                        onClick={handleSave}
+                        variant="outlined"
+                        color="primary"
+                    >
                         Save
                     </Button>
                 </DialogActions>
             </Dialog>
-           
+            {showMessage && (
+                <Snackbar
+                    open={showMessage}
+                    autoHideDuration={2000}
+                    onClose={() => setShowMessage(false)}
+                    message="Usuário cadastrado com sucesso!"
+                />
+            )}
         </div>
     );
 };
 
-export default UserTable;
+export default ConsultarUsuario;

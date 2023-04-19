@@ -2,119 +2,75 @@
   "users": [
     {
       "id": 1,
-      "name": "Pedro Henrique",
+      "nome": "Pedro Henrique",
       "cpf": "123.456.543-00",
       "endereco": "Rua T quadra 244 lote 13",
-      "datadenascimento": "02/03/2000",
       "sexo": "Masculino",
-      "Sexo": "Masculin",
-      "Data de nasciemnto": "02/03/200",
-      "Endereço": "Rua T quadra 244 lote 2",
-      "CPF": "123.456.543-1"
+      "nascimento": "10/06/1998"
+    },
+    {
+      "id": 2,
+      "nome": "Kelly",
+      "cpf": "693.456.543-12",
+      "endereco": "Rua p quadra 44 lote 23",
+      "sexo": "Masculino",
+      "nascimento": "11/07/2000"
     },
     {
       "id": 3,
-      "name": "Kelly",
-      "cpf": "693.456.543-12",
-      "endereco": "Rua p quadra 44 lote 23",
-      "datadenascimento": "02/03/2009",
-      "sexo": "Feminino"
+      "nome": "Gabriel",
+      "cpf": "123.456.543-21",
+      "endereco": "Rua e quadra 243 lote 23",
+      "sexo": "Masculino",
+      "nascimento": "11/07/2011"
     },
     {
       "id": 4,
-      "name": "Gabriel",
-      "cpf": "123.456.543-21",
-      "endereco": "Rua e quadra 243 lote 23",
-      "datadenascimento": "02/03/2007",
+      "nome": "Patrick",
+      "cpf": "123.456.000-12",
+      "endereco": "Rua UT quadra 300 lote 23",
+      "nascimento": "02/01/2008",
       "sexo": "Masculino"
     },
     {
       "id": 5,
-      "name": "Patrick",
-      "cpf": "123.456.000-12",
-      "endereco": "Rua UT quadra 300 lote 23",
-      "datadenascimento": "02/01/2008",
-      "sexo": "Masculino"
-    },
-    {
-      "id": 6,
-      "name": "Ingrid",
+      "nome": "Ingrid",
       "cpf": "123.456.333-11",
       "endereco": "Rua T63 quadra 100 lote 23",
-      "datadenascimento": "02/12/2001",
+      "nascimento": "02/12/2001",
       "sexo": "Feminino"
     },
     {
-      "id": 7,
-      "name": "Fábio",
+      "id": 6,
+      "nome": "Fábio",
       "cpf": "986.777.543-12",
       "endereco": "Rua T95 quadra 01 lote 23",
-      "datadenascimento": "09/06/2003",
+      "nascimento": "09/06/2003",
+      "sexo": "Masculino"
+    },
+    {
+      "id": 7,
+      "nome": "Eduardo",
+      "cpf": "123.321.543-12",
+      "endereco": "Rua T34 quadra 244 lote 23",
+      "nascimento": "02/03/1998",
       "sexo": "Masculino"
     },
     {
       "id": 8,
-      "name": "Eduardo",
-      "cpf": "123.321.543-12",
-      "endereco": "Rua T34 quadra 244 lote 23",
-      "datadenascimento": "02/03/1998",
-      "sexo": "Masculino"
-    },
-    {
-      "id": 9,
-      "name": "João",
+      "nome": "João",
       "cpf": "123.456.225-12",
       "endereco": "Rua TD quadra 368 lote 23",
-      "datadenascimento": "02/03/2005",
+      "nascimento": "02/03/2005",
       "sexo": "Masculino"
     },
     {
+      "nome": "Carlos ",
+      "cpf": "789.987.784-12",
+      "endereco": "Rua J 15",
+      "nascimento": "1996-08-12",
       "sexo": "Masculino",
-      "datadenascimento": "2000-07-11",
-      "endereco": "Rua j 14 ",
-      "cpf": "703.064.721-12",
-      "name": "ADAILTON ",
-      "id": 13
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11",
-      "endereco": "Rua j 14 ",
-      "cpf": "703.064.721-12",
-      "name": "ADAILTON SANTANA.",
-      "id": 14
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11",
-      "endereco": "Rua j 14 ",
-      "cpf": "703.064.721-12",
-      "name": "Carlos",
-      "id": 15
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11",
-      "endereco": "Rua t 34 quadra 33 lote 20 ",
-      "cpf": "703.064.721-12",
-      "name": "ADAILTON SANTANA",
-      "id": 17
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11",
-      "endereco": "Rua t 34 quadra 33 lote 20 ",
-      "cpf": "703.064.721-12",
-      "name": "Pablo",
-      "id": 19
-    },
-    {
-      "sexo": "Masculino",
-      "datadenascimento": "2000-07-11T03:00:00.000Z",
-      "endereco": "Rua j 14 ",
-      "cpf": "703.064.721-12",
-      "name": "ADAILTON SANTANA",
-      "id": 21
+      "id": 9
     }
   ]
 }

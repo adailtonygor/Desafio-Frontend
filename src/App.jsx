@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import RoutesApp from './components/Routes/Routes'
 
