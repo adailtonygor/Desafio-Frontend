@@ -12,12 +12,14 @@ import {
     Dialog,
     DialogTitle,
     DialogContent,
+    DialogContentText,
     DialogActions,
     TablePagination,
     Snackbar,
     MenuItem,
 } from '@material-ui/core';
 import axios from 'axios';
+import { Alert } from '@mui/material';
 
 const ConsultarUsuario = () => {
     const [users, setUsers] = useState([]);
@@ -27,8 +29,9 @@ const ConsultarUsuario = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [showMessage, setShowMessage] = useState(false);
     const [formSexo, setFormSexo] = useState({ sexo: '' });
+    const [open, setOpen] = useState(false);
+    const [userid, setUserid] = useState(null);
 
-    
     useEffect(() => {
         const fetchUsers = async () => {
             const result = await axios.get('http://localhost:3000/users/');
@@ -37,16 +40,20 @@ const ConsultarUsuario = () => {
         fetchUsers();
     }, []);
 
-    const handleDelete = async (id) => {
-        const confirmed = window.confirm(
-            'Tem certeza que deseja excluir este usuário?',
-        );
-        if (confirmed) {
-            await axios.delete(`http://localhost:3000/users/${id}`);
-            const excluirUsuario = users.filter((usuario) => usuario.id !== id);
-            setUsers([...excluirUsuario]);
-            //console.log(`Delete user with id ${id}`);
-        }
+    const handleClickOpen = (id) => {
+        setUserid(id);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = async () => {
+        await axios.delete(`http://localhost:3000/users/${userid}`);
+        const excluirUsuario = users.filter((usuario) => usuario.id !== userid);
+        setUsers([...excluirUsuario]);
+        setOpen(false);
     };
     const handleEdit = (id) => {
         const userToEdit = users.find((user) => user.id === id);
@@ -153,7 +160,7 @@ const ConsultarUsuario = () => {
                                                     variant="outlined"
                                                     color="secondary"
                                                     onClick={() =>
-                                                        handleDelete(user.id)
+                                                        handleClickOpen(user.id)
                                                     }
                                                 >
                                                     Excluir
@@ -179,6 +186,49 @@ const ConsultarUsuario = () => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </TableContainer>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle
+                    style={{ backgroundColor: '#2c387e' }}
+                    id="alert-dialog-title"
+                >
+                    {''}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText
+                        id="alert-dialog-description"
+                        style={{
+                            fontSize: '18px',
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                            color: 'black',
+                        }}
+                    >
+                        Tem certeza que deseja excluir este usuário ?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ justifyContent: 'center' }}>
+                    <Button
+                        onClick={handleDelete}
+                        variant="outlined"
+                        color="secondary"
+                    >
+                        Excluir
+                    </Button>
+                    <Button
+                        onClick={handleClose}
+                        variant="outlined"
+                        color="primary"
+                        autoFocus
+                    >
+                        Cancelar
+                    </Button>
+                </DialogActions>
+            </Dialog>
 
             <Dialog open={openDialog} onClose={handleCancel}>
                 <DialogTitle
@@ -188,9 +238,9 @@ const ConsultarUsuario = () => {
                         backgroundColor: '#1565c0',
                     }}
                 >
-                    Editar Usuário{' '}
+                    Editar usuário{' '}
                 </DialogTitle>
-                <DialogContent style={{ fontSize: '30px', lineHeight: '3em' }}>
+                <DialogContent style={{ fontSize: '35px', lineHeight: '2em' }}>
                     <TextField
                         label="Nome"
                         name="nome"
@@ -217,11 +267,11 @@ const ConsultarUsuario = () => {
                         name="nascimento"
                         value={editingUser?.nascimento}
                         onChange={handleInputChange}
+                        type="date"
                         fullWidth
-                        //type='date'
-                        //InputLabelProps={{
-                        //  shrink: true,
-                        //  }}
+                        InputLabelProps={{
+                          shrink: true,
+                          }}
                     />
                     <TextField
                         select
@@ -241,7 +291,7 @@ const ConsultarUsuario = () => {
                         variant="outlined"
                         color="secondary"
                     >
-                        Cancel
+                        Cancelar
                     </Button>
                     <Button
                         id="btn-success"
@@ -249,17 +299,23 @@ const ConsultarUsuario = () => {
                         variant="outlined"
                         color="primary"
                     >
-                        Save
+                        Salvar
                     </Button>
                 </DialogActions>
             </Dialog>
             {showMessage && (
                 <Snackbar
                     open={showMessage}
-                    autoHideDuration={2000}
+                    autoHideDuration={3000}
                     onClose={() => setShowMessage(false)}
-                    message="Usuário cadastrado com sucesso!"
-                />
+                >
+                    <Alert
+                        onClose={() => setShowMessage(false)}
+                        severity="success"
+                    >
+                        Usuário cadastrado com sucesso!
+                    </Alert>
+                </Snackbar>
             )}
         </div>
     );

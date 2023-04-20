@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { AppBar, Toolbar } from '@mui/material';
+import { AppBar, Toolbar } from '@material-ui/core';
 
 function NavBar() {
     const [active, setActive] = useState(false);
@@ -14,10 +14,9 @@ function NavBar() {
         setActive(false);
     };
 
-    
     return (
         <AppBar position="static">
-            <Toolbar sx={{ justifyContent: 'space-between' }}>
+            <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <NavLink
                     to="/"
                     onClick={handleClick}
@@ -35,7 +34,7 @@ function NavBar() {
                     Desafio Nova
                 </NavLink>
 
-                <div sx={{ display: 'flex' }}>
+                <div sx={{ marginRight: 'auto' }}>
                     <NavLink
                         to="/cadastro"
                         onClick={handleClick}
@@ -46,7 +45,6 @@ function NavBar() {
                                 color: isPending ? 'white' : 'white',
                                 textDecoration: 'none',
                                 margin: '0 10px',
-                                    
                             };
                         }}
                     >
@@ -60,7 +58,7 @@ function NavBar() {
                             return {
                                 fontWeight: isActive ? 'Bold' : '',
                                 color: isPending ? 'white' : 'white',
-                                textDecoration: 'none',  
+                                textDecoration: 'none',
                                 margin: active ? '5px' : '0',
                                 transition: 'margin 0.1s ease-in-out',
                             };

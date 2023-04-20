@@ -21,7 +21,6 @@ const schema = yup.object().shape({
     endereco: yup.string().required('Endereço obrigatório'),
     nascimento: yup.string().required('Data de nascimento obrigatório'),
     sexo: yup.string().required('Informe o sexo'),
-   
 });
 
 const Cadastro = () => {
@@ -35,9 +34,7 @@ const Cadastro = () => {
         resolver: yupResolver(schema),
     });
 
-
-
-       const onSubmit = async (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
         try {
             const response = await Axios.post(
@@ -54,7 +51,6 @@ const Cadastro = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            
             <Grid container direction="column" alignItems="center" spacing={3}>
                 <Grid item>
                     <TextField
@@ -88,7 +84,6 @@ const Cadastro = () => {
                         {...register('endereco')}
                         error={Boolean(errors.endereco)}
                         style={{ width: '400px' }}
-                      
                     />
                     {errors.endereco && (
                         <FormHelperText error>
