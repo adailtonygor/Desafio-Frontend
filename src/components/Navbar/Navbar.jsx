@@ -51,7 +51,7 @@ function NavBar() {
                         Cadastro
                     </NavLink>
                     <NavLink
-                        to="/consultarUsuario"
+                        to="/consultar-usuario"
                         onClick={handleClick}
                         onBlur={handleBlur}
                         style={({ isActive, isPending }) => {

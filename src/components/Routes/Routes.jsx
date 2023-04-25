@@ -21,7 +21,7 @@ function RoutesApp() {
                     <Route index element={<PaginaInicial />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route
-                        path="/consultarUsuario"
+                        path="/consultar-usuario"
                         element={<ConsultarUsuario />}
                     />
                 </Route>

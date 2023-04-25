@@ -6,7 +6,10 @@
       "cpf": "693.456.543-12",
       "endereco": "Rua p quadra 44 lote 23",
       "sexo": "Masculino",
-      "nascimento": "2001-12-23"
+      "nascimento": "2001-12-23",
+      "numero": "0",
+      "uf": "GO",
+      "cidade": "Aparecida de Goiânia "
     },
     {
       "id": 2,
@@ -14,7 +17,10 @@
       "cpf": "123.456.543-21",
       "endereco": "Rua e quadra 243 lote 23",
       "sexo": "Masculino",
-      "nascimento": "2011-10-21"
+      "nascimento": "2011-10-21",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO"
     },
     {
       "id": 3,
@@ -22,7 +28,10 @@
       "cpf": "123.456.000-12",
       "endereco": "Rua UT quadra 300 lote 23",
       "nascimento": "2001-02-22",
-      "sexo": "Masculino"
+      "sexo": "Masculino",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia ",
+      "uf": "GO"
     },
     {
       "id": 4,
@@ -30,7 +39,10 @@
       "cpf": "123.456.333-11",
       "endereco": "Rua T63 quadra 100 lote 23",
       "nascimento": "2001-01-12",
-      "sexo": "Masculino"
+      "sexo": "Masculino",
+      "cidade": "Aparecida de Goiânia ",
+      "uf": "GO",
+      "numero": "0"
     },
     {
       "nome": "Carlos ",
@@ -38,7 +50,10 @@
       "endereco": "Rua J 15",
       "nascimento": "2002-08-13",
       "sexo": "Masculino",
-      "id": 5
+      "id": 5,
+      "uf": "GO",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0"
     },
     {
       "nome": "Katia ",
@@ -46,15 +61,21 @@
       "endereco": "Rua T32 Quadra 95 lote 44 ",
       "nascimento": "2001-12-21",
       "sexo": "Feminino",
-      "id": 6
+      "id": 6,
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia ",
+      "uf": "GO"
     },
     {
       "nome": "Carol ",
       "cpf": "782.124.125-45",
       "endereco": "Rua L34 Quadra 95 lote 33 ",
       "nascimento": "1998-01-31",
-      "sexo": "Feminino",
-      "id": 7
+      "sexo": "Masculino",
+      "id": 7,
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO"
     },
     {
       "nome": "Pedro Henrique ",
@@ -62,7 +83,10 @@
       "endereco": "Avenida 12 ",
       "nascimento": "1997-06-23",
       "sexo": "Masculino",
-      "id": 8
+      "id": 8,
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO"
     },
     {
       "nome": "Higor ",
@@ -70,7 +94,10 @@
       "endereco": "Rua t 34 quadra 33 lote 20 ",
       "nascimento": "1998-07-25",
       "sexo": "Masculino",
-      "id": 9
+      "id": 9,
+      "numero": "0",
+      "uf": "AP",
+      "cidade": "Aparecida"
     },
     {
       "nome": "Adailton ",
@@ -78,7 +105,10 @@
       "endereco": "Rua j 14 ",
       "nascimento": "2000-07-11",
       "sexo": "Masculino",
-      "id": 11
+      "id": 11,
+      "numero": "0",
+      "cidade": "Aparecida",
+      "uf": "AL"
     },
     {
       "nome": "Izaque ",
@@ -86,7 +116,99 @@
       "endereco": "Rua J 15",
       "nascimento": "2001-07-12",
       "sexo": "Masculino",
-      "id": 12
+      "id": 12,
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO"
+    },
+    {
+      "nome": "Pablo",
+      "cpf": "789.987.784-12",
+      "endereco": "Rua t 34 quadra 33 lote 20 ",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "nascimento": "1998-01-23",
+      "sexo": "Masculino",
+      "uf": "GO",
+      "id": 13
+    },
+    {
+      "nome": "Carlos ",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua t 34 quadra 33 lote 20 ",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "nascimento": "2000-07-11",
+      "sexo": "Masculino",
+      "uf": "GO",
+      "id": 14
+    },
+    {
+      "nome": "Kaio",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua t 34 quadra 33 lote 20 ",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "2001-05-12",
+      "sexo": "Masculino",
+      "id": 15
+    },
+    {
+      "nome": "Paulo ",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua t 34 quadra 33 lote 20 ",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "2001-02-13",
+      "sexo": "Masculino",
+      "id": 16
+    },
+    {
+      "nome": "Adailton ",
+      "cpf": "789.987.784-12",
+      "endereco": "Rua t 34 quadra 33 lote 20 ",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "2001-05-02",
+      "sexo": "Masculino",
+      "id": 17
+    },
+    {
+      "nome": "Adailton ",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua J 15",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "2001-06-12",
+      "sexo": "Masculino",
+      "id": 18
+    },
+    {
+      "nome": "Daniel ",
+      "cpf": "770.784.685-12",
+      "endereco": "Rua L34 Quadra 95 lote 33 ",
+      "cidade": "Aparecida de Goiânia ",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "1998-06-23",
+      "sexo": "Masculino",
+      "id": 19
+    },
+    {
+      "nome": "Fabio ",
+      "cpf": "750.056.950.12",
+      "endereco": "Rua H 131",
+      "cep": "74937-300",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "2012-05-12",
+      "sexo": "Masculino",
+      "id": 20
     }
   ]
 }

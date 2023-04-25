@@ -120,6 +120,9 @@ const ConsultarUsuario = () => {
                             <TableCell>Nome</TableCell>
                             <TableCell>CPF</TableCell>
                             <TableCell>Endereço</TableCell>
+                            <TableCell>Cidade</TableCell>
+                            <TableCell>Número</TableCell>
+                            <TableCell>UF</TableCell>
                             <TableCell>Data de Nascimento</TableCell>
                             <TableCell>Sexo</TableCell>
                         </TableRow>
@@ -136,6 +139,9 @@ const ConsultarUsuario = () => {
                                     <TableCell>{user.nome}</TableCell>
                                     <TableCell>{user.cpf}</TableCell>
                                     <TableCell>{user.endereco}</TableCell>
+                                    <TableCell>{user.cidade}</TableCell>
+                                    <TableCell>{user.numero}</TableCell>
+                                    <TableCell>{user.uf}</TableCell>
                                     <TableCell>
                                         {new Date(
                                             user.nascimento,
@@ -213,19 +219,19 @@ const ConsultarUsuario = () => {
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'center' }}>
                     <Button
-                        onClick={handleDelete}
-                        variant="outlined"
-                        color="secondary"
-                    >
-                        Excluir
-                    </Button>
-                    <Button
                         onClick={handleClose}
                         variant="outlined"
                         color="primary"
                         autoFocus
                     >
                         Cancelar
+                    </Button>
+                    <Button
+                        onClick={handleDelete}
+                        variant="outlined"
+                        color="secondary"
+                    >
+                        Excluir
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -238,61 +244,104 @@ const ConsultarUsuario = () => {
                         backgroundColor: '#1565c0',
                     }}
                 >
-                    Editar usuário{' '}
+                    Editar usuário
                 </DialogTitle>
-                <DialogContent style={{ fontSize: '35px', lineHeight: '2em' }}>
-                    <TextField
-                        label="Nome"
-                        name="nome"
-                        value={editingUser?.nome}
-                        onChange={handleInputChange}
-                        fullWidth
-                    />
-                    <TextField
-                        label="CPF"
-                        name="cpf"
-                        value={editingUser?.cpf}
-                        onChange={handleInputChange}
-                        fullWidth
-                    />
-                    <TextField
-                        label="Endereço"
-                        name="endereco"
-                        value={editingUser?.endereco}
-                        onChange={handleInputChange}
-                        fullWidth
-                    />
-                    <TextField
-                        label="Data de nascimento"
-                        name="nascimento"
-                        value={editingUser?.nascimento}
-                        onChange={handleInputChange}
-                        type="date"
-                        fullWidth
-                        InputLabelProps={{
-                          shrink: true,
-                          }}
-                    />
-                    <TextField
-                        select
-                        label="Sexo"
-                        name="sexo"
-                        value={formSexo?.sexo}
-                        onChange={handleInputChange}
-                        fullWidth
-                    >
-                        <MenuItem value="Masculino">Masculino</MenuItem>
-                        <MenuItem value="Feminino">Feminino</MenuItem>
-                    </TextField>
+
+                <DialogContent
+                    style={{
+                        fontSize: '40px',
+                        lineHeight: '1.5em',
+                    }}
+                >
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Nome"
+                                name="nome"
+                                value={editingUser?.nome}
+                                onChange={handleInputChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="CPF"
+                                name="cpf"
+                                value={editingUser?.cpf}
+                                onChange={handleInputChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Endereço"
+                                name="endereco"
+                                value={editingUser?.endereco}
+                                onChange={handleInputChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Número"
+                                name="numero"
+                                value={editingUser?.numero}
+                                onChange={handleInputChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Cidade"
+                                name="cidade"
+                                value={editingUser?.cidade}
+                                onChange={handleInputChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                select
+                                label="UF"
+                                name="uf"
+                                value={editingUser?.uf}
+                                onChange={handleInputChange}
+                                fullWidth
+                            >
+                                
+                                <MenuItem value="AC">AC</MenuItem>
+                                <MenuItem value="AL">AL</MenuItem>
+                                <MenuItem value="AP">AP</MenuItem>
+                                <MenuItem value="GO">GO</MenuItem>
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label="Data de Nascimento"
+                                name="nascimento"
+                                value={editingUser?.nascimento}
+                                onChange={handleInputChange}
+                                type="date"
+                                fullWidth
+                                InputLabelProps={{ shrink: true }}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                select
+                                label="Sexo"
+                                name="sexo"
+                                value={formSexo?.sexo}
+                                onChange={handleInputChange}
+                                fullWidth
+                            >
+                                <MenuItem value="Masculino">Masculino</MenuItem>
+                                <MenuItem value="Feminino">Feminino</MenuItem>
+                            </TextField>
+                        </Grid>
+                    </Grid>
                 </DialogContent>
-                <DialogActions>
-                    <Button
-                        onClick={handleCancel}
-                        variant="outlined"
-                        color="secondary"
-                    >
-                        Cancelar
-                    </Button>
+                <DialogActions style={{ justifyContent: 'center' }}>
                     <Button
                         id="btn-success"
                         onClick={handleSave}
@@ -300,6 +349,13 @@ const ConsultarUsuario = () => {
                         color="primary"
                     >
                         Salvar
+                    </Button>
+                    <Button
+                        onClick={handleCancel}
+                        variant="outlined"
+                        color="secondary"
+                    >
+                        Cancelar
                     </Button>
                 </DialogActions>
             </Dialog>
