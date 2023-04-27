@@ -16,6 +16,7 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+
 const schema = yup.object().shape({
     nome: yup.string().required('Nome obrigatório'),
     cpf: yup.string().required('CPF obrigatório'),
@@ -101,12 +102,7 @@ const Cadastro = () => {
                     alignItems="center"
                     style={{ height: '60vh', marginLeft: '15px' }}
                 >
-                    <Grid
-                        item
-                        container
-                        columnspacing={{ xs: 1, sm: 2, md: 3 }}
-                        xs={7}
-                    >
+                    <Grid item container xs={7}>
                         <Grid item xs={6}>
                             <TextField
                                 variant="outlined"
@@ -138,20 +134,6 @@ const Cadastro = () => {
                         <Grid item xs={6}>
                             <TextField
                                 variant="outlined"
-                                placeholder="Endereço"
-                                {...register('endereco')}
-                                error={Boolean(errors.endereco)}
-                                style={{ width: '400px', margin: '10px' }}
-                            />
-                            {errors.endereco && (
-                                <FormHelperText error>
-                                    {errors.endereco?.message}
-                                </FormHelperText>
-                            )}
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
                                 placeholder="CEP"
                                 {...register('cep')}
                                 onBlur={checkCEP}
@@ -161,6 +143,20 @@ const Cadastro = () => {
                             {errors.cep && (
                                 <FormHelperText error>
                                     {errors.cep?.message}
+                                </FormHelperText>
+                            )}
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
+                                placeholder="Endereço"
+                                {...register('endereco')}
+                                error={Boolean(errors.endereco)}
+                                style={{ width: '400px', margin: '10px' }}
+                            />
+                            {errors.endereco && (
+                                <FormHelperText error>
+                                    {errors.endereco?.message}
                                 </FormHelperText>
                             )}
                         </Grid>
@@ -205,12 +201,10 @@ const Cadastro = () => {
                                     error={Boolean(errors.uf)}
                                     style={{ width: '400px', margin: '10px' }}
                                 >
-                                    <option value="">
-                                        Selecione UF
-                                    </option>
-                                    {siglaUf.sort().map((uf) => (
+                                    <option value="">Selecione UF</option>
+                                    {siglaUf.sort().map((uf, index) => (
                                         // eslint-disable-next-line react/jsx-key
-                                        <option key={`${uf}`} value={uf.sigla}>
+                                        <option key={index} value={uf.sigla}>
                                             {uf.sigla}
                                         </option>
                                     ))}
@@ -237,10 +231,7 @@ const Cadastro = () => {
                             />
                             {errors.nascimento && (
                                 <FormHelperText error>
-                                    {errors.nascimento?.message ===
-                                    'Campo obrigatório'
-                                        ? 'Por favor, informe a data de nascimento'
-                                        : 'Data de nascimento inválida'}
+                                    {errors.nascimento?.message}
                                 </FormHelperText>
                             )}
                         </Grid>
@@ -248,16 +239,19 @@ const Cadastro = () => {
                             <FormControl
                                 style={{ width: '400px', margin: '10px' }}
                             >
-                                <InputLabel id="sexo-label">Sexo</InputLabel>
+                                <InputLabel id="sexo-label"> Sexo </InputLabel>
                                 <Select
                                     variant="outlined"
-                                    labelId="sexo-label"
+                                    label="sexo-label"
                                     id="sexo-label"
                                     value={sexo}
                                     {...register('sexo')}
                                     onChange={(e) => setSexo(e.target.value)}
                                     error={Boolean(errors.sexo)}
                                 >
+                                    <MenuItem value="">
+                                        Sexo
+                                    </MenuItem>
                                     <MenuItem value="Feminino">
                                         Feminino
                                     </MenuItem>
@@ -272,18 +266,22 @@ const Cadastro = () => {
                                 )}
                             </FormControl>
                         </Grid>
-                        <Grid
-                            container
-                            justifyContent="center"
-                            style={{ marginBottom: '10px' }}
-                        >
-                            <Box mt={6}>
+                        <Grid item xs={12}>
+                            <Box display="flex" justifyContent="center">
                                 <Button
                                     type="submit"
-                                    variant="contained"
+                                    variant="outlined"
                                     color="primary"
                                 >
                                     Cadastrar
+                                </Button>
+                                <Box mx={2}></Box>
+                                <Button
+                                    type="reset"
+                                    variant="outlined"
+                                    color="secondary"
+                                >
+                                    Limpar
                                 </Button>
                             </Box>
                         </Grid>

@@ -120,6 +120,7 @@ const ConsultarUsuario = () => {
                             <TableCell>Nome</TableCell>
                             <TableCell>CPF</TableCell>
                             <TableCell>Endereço</TableCell>
+                            <TableCell>CEP</TableCell>
                             <TableCell>Cidade</TableCell>
                             <TableCell>Número</TableCell>
                             <TableCell>UF</TableCell>
@@ -139,6 +140,7 @@ const ConsultarUsuario = () => {
                                     <TableCell>{user.nome}</TableCell>
                                     <TableCell>{user.cpf}</TableCell>
                                     <TableCell>{user.endereco}</TableCell>
+                                    <TableCell>{user.cep}</TableCell>
                                     <TableCell>{user.cidade}</TableCell>
                                     <TableCell>{user.numero}</TableCell>
                                     <TableCell>{user.uf}</TableCell>
@@ -251,11 +253,14 @@ const ConsultarUsuario = () => {
                     style={{
                         fontSize: '40px',
                         lineHeight: '1.5em',
+                        marginTop: '40px',
+                        marginBottom: '10px',
                     }}
                 >
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
+                                variant="outlined"
                                 label="Nome"
                                 name="nome"
                                 value={editingUser?.nome}
@@ -265,6 +270,7 @@ const ConsultarUsuario = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                variant="outlined"
                                 label="CPF"
                                 name="cpf"
                                 value={editingUser?.cpf}
@@ -274,6 +280,17 @@ const ConsultarUsuario = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
+                                variant="outlined"
+                                label="CEP"
+                                name="cep"
+                                value={editingUser?.cep}
+                                onChange={handleInputChange}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
                                 label="Endereço"
                                 name="endereco"
                                 value={editingUser?.endereco}
@@ -283,6 +300,7 @@ const ConsultarUsuario = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
+                                variant="outlined"
                                 label="Número"
                                 name="numero"
                                 value={editingUser?.numero}
@@ -292,6 +310,7 @@ const ConsultarUsuario = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
+                                variant="outlined"
                                 label="Cidade"
                                 name="cidade"
                                 value={editingUser?.cidade}
@@ -301,14 +320,14 @@ const ConsultarUsuario = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
+                                variant="outlined"
                                 select
                                 label="UF"
                                 name="uf"
-                                value={editingUser?.uf}
+                                value={editingUser?.uf || ''}
                                 onChange={handleInputChange}
                                 fullWidth
                             >
-                                
                                 <MenuItem value="AC">AC</MenuItem>
                                 <MenuItem value="AL">AL</MenuItem>
                                 <MenuItem value="AP">AP</MenuItem>
@@ -317,6 +336,7 @@ const ConsultarUsuario = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
+                                variant="outlined"
                                 label="Data de Nascimento"
                                 name="nascimento"
                                 value={editingUser?.nascimento}
@@ -328,6 +348,7 @@ const ConsultarUsuario = () => {
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
+                                variant="outlined"
                                 select
                                 label="Sexo"
                                 name="sexo"
@@ -341,7 +362,9 @@ const ConsultarUsuario = () => {
                         </Grid>
                     </Grid>
                 </DialogContent>
-                <DialogActions style={{ justifyContent: 'center' }}>
+                <DialogActions
+                    style={{ justifyContent: 'center', marginBottom: '35px' }}
+                >
                     <Button
                         id="btn-success"
                         onClick={handleSave}

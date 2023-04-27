@@ -9,7 +9,8 @@
       "nascimento": "2001-12-23",
       "numero": "0",
       "uf": "GO",
-      "cidade": "Aparecida de Goiânia "
+      "cidade": "Aparecida de Goiânia ",
+      "cep": "74937-300"
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
       "nascimento": "2011-10-21",
       "cidade": "Aparecida de Goiânia ",
       "numero": "0",
-      "uf": "GO"
+      "uf": "GO",
+      "cep": "74937-300"
     },
     {
       "id": 3,
@@ -31,7 +33,8 @@
       "sexo": "Masculino",
       "numero": "0",
       "cidade": "Aparecida de Goiânia ",
-      "uf": "GO"
+      "uf": "GO",
+      "cep": "74937-300"
     },
     {
       "id": 4,
@@ -39,21 +42,23 @@
       "cpf": "123.456.333-11",
       "endereco": "Rua T63 quadra 100 lote 23",
       "nascimento": "2001-01-12",
-      "sexo": "Masculino",
+      "sexo": "Feminino",
       "cidade": "Aparecida de Goiânia ",
       "uf": "GO",
-      "numero": "0"
+      "numero": "0",
+      "cep": "74937-300"
     },
     {
       "nome": "Carlos ",
-      "cpf": "789.987.784-12",
-      "endereco": "Rua J 15",
-      "nascimento": "2002-08-13",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua H 131 ",
+      "nascimento": "2000-07-11",
       "sexo": "Masculino",
       "id": 5,
       "uf": "GO",
       "cidade": "Aparecida de Goiânia",
-      "numero": "0"
+      "numero": "0",
+      "cep": "74937-300"
     },
     {
       "nome": "Katia ",
@@ -64,7 +69,8 @@
       "id": 6,
       "numero": "0",
       "cidade": "Aparecida de Goiânia ",
-      "uf": "GO"
+      "uf": "GO",
+      "cep": "74937-300"
     },
     {
       "nome": "Carol ",
@@ -75,7 +81,8 @@
       "id": 7,
       "cidade": "Aparecida de Goiânia ",
       "numero": "0",
-      "uf": "GO"
+      "uf": "GO",
+      "cep": "74937-300"
     },
     {
       "nome": "Pedro Henrique ",
@@ -86,7 +93,8 @@
       "id": 8,
       "cidade": "Aparecida de Goiânia ",
       "numero": "0",
-      "uf": "GO"
+      "uf": "GO",
+      "cep": "74937-300"
     },
     {
       "nome": "Higor ",
@@ -97,7 +105,8 @@
       "id": 9,
       "numero": "0",
       "uf": "AP",
-      "cidade": "Aparecida"
+      "cidade": "Aparecida",
+      "cep": "74937-300"
     },
     {
       "nome": "Adailton ",
@@ -108,7 +117,8 @@
       "id": 11,
       "numero": "0",
       "cidade": "Aparecida",
-      "uf": "AL"
+      "uf": "AL",
+      "cep": "74937-300"
     },
     {
       "nome": "Izaque ",
@@ -119,7 +129,8 @@
       "id": 12,
       "cidade": "Aparecida de Goiânia ",
       "numero": "0",
-      "uf": "GO"
+      "uf": "GO",
+      "cep": "74937-300"
     },
     {
       "nome": "Pablo",
@@ -130,7 +141,8 @@
       "nascimento": "1998-01-23",
       "sexo": "Masculino",
       "uf": "GO",
-      "id": 13
+      "id": 13,
+      "cep": "74937-300"
     },
     {
       "nome": "Carlos ",
@@ -141,7 +153,8 @@
       "nascimento": "2000-07-11",
       "sexo": "Masculino",
       "uf": "GO",
-      "id": 14
+      "id": 14,
+      "cep": "74937-300"
     },
     {
       "nome": "Kaio",
@@ -152,7 +165,8 @@
       "uf": "GO",
       "nascimento": "2001-05-12",
       "sexo": "Masculino",
-      "id": 15
+      "id": 15,
+      "cep": "74937-300"
     },
     {
       "nome": "Paulo ",
@@ -163,7 +177,8 @@
       "uf": "GO",
       "nascimento": "2001-02-13",
       "sexo": "Masculino",
-      "id": 16
+      "id": 16,
+      "cep": "74937-300"
     },
     {
       "nome": "Adailton ",
@@ -174,7 +189,8 @@
       "uf": "GO",
       "nascimento": "2001-05-02",
       "sexo": "Masculino",
-      "id": 17
+      "id": 17,
+      "cep": "74937-300"
     },
     {
       "nome": "Adailton ",
@@ -185,7 +201,8 @@
       "uf": "GO",
       "nascimento": "2001-06-12",
       "sexo": "Masculino",
-      "id": 18
+      "id": 18,
+      "cep": "74937-300"
     },
     {
       "nome": "Daniel ",
@@ -196,7 +213,8 @@
       "uf": "GO",
       "nascimento": "1998-06-23",
       "sexo": "Masculino",
-      "id": 19
+      "id": 19,
+      "cep": "74937-300"
     },
     {
       "nome": "Fabio ",
@@ -209,6 +227,42 @@
       "nascimento": "2012-05-12",
       "sexo": "Masculino",
       "id": 20
+    },
+    {
+      "nome": "Kaio ",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua H 131",
+      "cep": "74937-300",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "1997-05-12",
+      "sexo": "Masculino",
+      "id": 21
+    },
+    {
+      "nome": "Paulo ",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua H 131",
+      "cep": "74937-300",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "2001-03-12",
+      "sexo": "Masculino",
+      "id": 22
+    },
+    {
+      "nome": "Francisco ",
+      "cpf": "703.064.721-12",
+      "endereco": "Rua H 131",
+      "cep": "74937-300",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "1998-04-12",
+      "sexo": "Masculino",
+      "id": 23
     }
   ]
 }

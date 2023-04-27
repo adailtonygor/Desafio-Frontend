@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
 
 function NavBar() {
-    const [active, setActive] = useState(false);
+    const [setActive] = useState(false);
 
     const handleClick = () => {
         setActive(true);
@@ -26,8 +26,6 @@ function NavBar() {
                             fontWeight: isActive ? 'Bold' : '',
                             color: isPending ? 'white' : 'white',
                             textDecoration: 'none',
-                            margin: active ? '10px' : '0',
-                            transition: 'margin 0.1s ease-in-out',
                         };
                     }}
                 >
@@ -59,8 +57,6 @@ function NavBar() {
                                 fontWeight: isActive ? 'Bold' : '',
                                 color: isPending ? 'white' : 'white',
                                 textDecoration: 'none',
-                                margin: active ? '5px' : '0',
-                                transition: 'margin 0.1s ease-in-out',
                             };
                         }}
                     >
