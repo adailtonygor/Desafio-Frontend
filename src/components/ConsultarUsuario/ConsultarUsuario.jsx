@@ -6,7 +6,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    TextField,
     Grid,
     Button,
     Dialog,
@@ -16,10 +15,11 @@ import {
     DialogActions,
     TablePagination,
     Snackbar,
-    MenuItem,
 } from '@material-ui/core';
-import axios from 'axios';
 import { Alert } from '@mui/material';
+import useStyles from './Styles';
+import EditarUsuario from '../EditarUsuario/EditarUsuario';
+import { dadosUsuario, deleteUsuarios, getListaUsuarios } from '../../services';
 
 const ConsultarUsuario = () => {
     const [users, setUsers] = useState([]);
@@ -31,10 +31,11 @@ const ConsultarUsuario = () => {
     const [formSexo, setFormSexo] = useState({ sexo: '' });
     const [open, setOpen] = useState(false);
     const [userid, setUserid] = useState(null);
+    const classes = useStyles();
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const result = await axios.get('http://localhost:3000/users/');
+            const result = await getListaUsuarios();
             setUsers(result.data);
         };
         fetchUsers();
@@ -50,25 +51,23 @@ const ConsultarUsuario = () => {
     };
 
     const handleDelete = async () => {
-        await axios.delete(`http://localhost:3000/users/${userid}`);
+        await deleteUsuarios(userid);
         const excluirUsuario = users.filter((usuario) => usuario.id !== userid);
         setUsers([...excluirUsuario]);
         setOpen(false);
     };
     const handleEdit = (id) => {
-        const userToEdit = users.find((user) => user.id === id);
-        setEditingUser(userToEdit);
+        const user = users.find((user) => user.id === id);
+        setEditingUser(user);
+        setFormSexo({ sexo: user.sexo });
         setOpenDialog(true);
     };
 
     const handleSave = async () => {
         try {
             const updatedUser = { ...editingUser };
-            const result = await axios.put(
-                `http://localhost:3000/users/${editingUser.id}`,
-                updatedUser,
-            );
-            console.log(result);
+            await dadosUsuario(editingUser, updatedUser);
+
             setShowMessage(true);
             setEditingUser(null);
             setOpenDialog(false);
@@ -81,7 +80,7 @@ const ConsultarUsuario = () => {
                 return updatedUsers;
             });
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -201,25 +200,18 @@ const ConsultarUsuario = () => {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle
-                    style={{ backgroundColor: '#2c387e' }}
+                    className={classes.colorConfirmarExclusão}
                     id="alert-dialog-title"
-                >
-                    {''}
-                </DialogTitle>
+                ></DialogTitle>
                 <DialogContent>
                     <DialogContentText
                         id="alert-dialog-description"
-                        style={{
-                            fontSize: '18px',
-                            fontWeight: 'bold',
-                            textAlign: 'center',
-                            color: 'black',
-                        }}
+                        className={classes.excluirUsuarioDialog}
                     >
                         Tem certeza que deseja excluir este usuário ?
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions style={{ justifyContent: 'center' }}>
+                <DialogActions className={classes.botoesExcluirUsuarioDialog}>
                     <Button
                         onClick={handleClose}
                         variant="outlined"
@@ -238,150 +230,17 @@ const ConsultarUsuario = () => {
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={openDialog} onClose={handleCancel}>
-                <DialogTitle
-                    style={{
-                        color: 'white',
-                        textAlign: 'center',
-                        backgroundColor: '#1565c0',
-                    }}
-                >
-                    Editar usuário
-                </DialogTitle>
+            <EditarUsuario
+                user={editingUser}
+                open={openDialog}
+                formSexo={formSexo}
+                editingUser={editingUser}
+                handleInputChange={handleInputChange}
+                handleCancel={handleCancel}
+                handleSave={handleSave}
+                setOpen={setOpenDialog}
+            />
 
-                <DialogContent
-                    style={{
-                        fontSize: '40px',
-                        lineHeight: '1.5em',
-                        marginTop: '40px',
-                        marginBottom: '10px',
-                    }}
-                >
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                label="Nome"
-                                name="nome"
-                                value={editingUser?.nome}
-                                onChange={handleInputChange}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                label="CPF"
-                                name="cpf"
-                                value={editingUser?.cpf}
-                                onChange={handleInputChange}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                label="CEP"
-                                name="cep"
-                                value={editingUser?.cep}
-                                onChange={handleInputChange}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                label="Endereço"
-                                name="endereco"
-                                value={editingUser?.endereco}
-                                onChange={handleInputChange}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                label="Número"
-                                name="numero"
-                                value={editingUser?.numero}
-                                onChange={handleInputChange}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                label="Cidade"
-                                name="cidade"
-                                value={editingUser?.cidade}
-                                onChange={handleInputChange}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                select
-                                label="UF"
-                                name="uf"
-                                value={editingUser?.uf || ''}
-                                onChange={handleInputChange}
-                                fullWidth
-                            >
-                                <MenuItem value="AC">AC</MenuItem>
-                                <MenuItem value="AL">AL</MenuItem>
-                                <MenuItem value="AP">AP</MenuItem>
-                                <MenuItem value="GO">GO</MenuItem>
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                label="Data de Nascimento"
-                                name="nascimento"
-                                value={editingUser?.nascimento}
-                                onChange={handleInputChange}
-                                type="date"
-                                fullWidth
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                select
-                                label="Sexo"
-                                name="sexo"
-                                value={formSexo?.sexo}
-                                onChange={handleInputChange}
-                                fullWidth
-                            >
-                                <MenuItem value="Masculino">Masculino</MenuItem>
-                                <MenuItem value="Feminino">Feminino</MenuItem>
-                            </TextField>
-                        </Grid>
-                    </Grid>
-                </DialogContent>
-                <DialogActions
-                    style={{ justifyContent: 'center', marginBottom: '35px' }}
-                >
-                    <Button
-                        id="btn-success"
-                        onClick={handleSave}
-                        variant="outlined"
-                        color="primary"
-                    >
-                        Salvar
-                    </Button>
-                    <Button
-                        onClick={handleCancel}
-                        variant="outlined"
-                        color="secondary"
-                    >
-                        Cancelar
-                    </Button>
-                </DialogActions>
-            </Dialog>
             {showMessage && (
                 <Snackbar
                     open={showMessage}
