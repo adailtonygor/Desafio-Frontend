@@ -30,12 +30,12 @@ Estou utilizando uma Api Fake nesse Desafio. Para iniciar utilize o comando 'jso
 
 
 
-![image](https://user-images.githubusercontent.com/105685493/233464440-665de309-0b88-436e-9fef-8848a1e4e99a.png)
+![image](https://user-images.githubusercontent.com/105685493/236308912-269e9031-7ef2-45f4-9dec-ac0839645a42.png)
 
-![image](https://user-images.githubusercontent.com/105685493/233464610-f96772be-038d-4cd1-90dc-5c6586905a3c.png)
 
-![image](https://user-images.githubusercontent.com/105685493/233464781-3aa3934a-0b43-4b61-8adc-6799782cf7c6.png)
+![image](https://user-images.githubusercontent.com/105685493/236309206-48997e0a-25f7-4358-af1a-dfd801a5705d.png)
 
+![image](https://user-images.githubusercontent.com/105685493/236309361-6e83aafc-1042-4b49-aaac-c1d080d24bcb.png)
 
 
 
