@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
     Table,
     TableBody,
@@ -20,6 +20,9 @@ import { Alert } from '@mui/material';
 import useStyles from './Styles';
 import EditarUsuario from '../EditarUsuario/EditarUsuario';
 import { dadosUsuario, deleteUsuarios, getListaUsuarios } from '../../services';
+import { useForm } from 'react-hook-form';
+import { schema } from '../FormUsuario/schema';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const ConsultarUsuario = () => {
     const [users, setUsers] = useState([]);
@@ -28,7 +31,6 @@ const ConsultarUsuario = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [showMessage, setShowMessage] = useState(false);
-    const [formSexo, setFormSexo] = useState({ sexo: '' });
     const [open, setOpen] = useState(false);
     const [userid, setUserid] = useState(null);
     const classes = useStyles();
@@ -40,6 +42,14 @@ const ConsultarUsuario = () => {
         };
         fetchUsers();
     }, []);
+
+    const validations = useMemo(() => schema(), []);
+
+    const methods = useForm({
+        resolver: yupResolver(validations),
+    });
+
+    const { setValue } = methods;
 
     const handleClickOpen = (id) => {
         setUserid(id);
@@ -56,17 +66,26 @@ const ConsultarUsuario = () => {
         setUsers([...excluirUsuario]);
         setOpen(false);
     };
+
     const handleEdit = (id) => {
         const user = users.find((user) => user.id === id);
+        setValue('nome', user?.nome);
+        setValue('cpf', user?.cpf);
+        setValue('cep', user?.cep);
+        setValue('endereco', user?.endereco);
+        setValue('cidade', user?.cidade);
+        setValue('numero', user?.numero);
+        setValue('uf', user?.uf);
+        setValue('nascimento', user?.nascimento);
+        setValue('sexo', user?.sexo);
+
         setEditingUser(user);
-        setFormSexo({ sexo: user.sexo });
         setOpenDialog(true);
     };
 
-    const handleSave = async () => {
+    const handleSave = async (data) => {
         try {
-            const updatedUser = { ...editingUser };
-            await dadosUsuario(editingUser, updatedUser);
+            await dadosUsuario(editingUser.id, data);
 
             setShowMessage(true);
             setEditingUser(null);
@@ -76,7 +95,7 @@ const ConsultarUsuario = () => {
                 const userIndex = prevUsers.findIndex(
                     (user) => user.id === editingUser.id,
                 );
-                updatedUsers[userIndex] = updatedUser;
+                updatedUsers[userIndex] = { ...data, id: editingUser.id };
                 return updatedUsers;
             });
         } catch (error) {
@@ -89,14 +108,7 @@ const ConsultarUsuario = () => {
         setOpenDialog(false);
     };
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormSexo((prevFormSexo) => ({ ...prevFormSexo, [name]: value }));
-        setEditingUser((prevEditingUser) => ({
-            ...prevEditingUser,
-            [name]: value,
-        }));
-    };
+    
     const handleChangePage = (_event, newPage) => {
         const maxPage = Math.ceil(users.length / rowsPerPage) - 1;
         if (newPage >= 0 && newPage <= maxPage) {
@@ -231,14 +243,10 @@ const ConsultarUsuario = () => {
             </Dialog>
 
             <EditarUsuario
-                user={editingUser}
                 open={openDialog}
-                formSexo={formSexo}
-                editingUser={editingUser}
-                handleInputChange={handleInputChange}
-                handleCancel={handleCancel}
                 handleSave={handleSave}
-                setOpen={setOpenDialog}
+                methods={methods}
+                onClickCancel={() => handleCancel()}
             />
 
             {showMessage && (

@@ -1,19 +1,59 @@
-import { USERS_ENDPOINT } from './components/endpoint';
-import { ESTADOS_ENDPOINT } from './components/endpoint';
-import { CEP_ENDPOINT } from './components/endpoint';
+import { ENDPOINT } from './components/endpoint';
 import axios from 'axios';
 
 export const getConsultaCep = (cep) =>
-    axios.get(`${CEP_ENDPOINT}/${cep}/json/`);
+    axios.get(`${ENDPOINT.CEP}/${cep}/json/`);
 
-export const getConsultaUf = () => axios.get(ESTADOS_ENDPOINT);
+export const getConsultaUf = () => axios.get(ENDPOINT.ESTADOS);
 
-export const postOnSubmit = (data) => axios.post(USERS_ENDPOINT, data);
+export const postOnSubmit = (data) => axios.post(ENDPOINT.USERS, data);
 
-export const getListaUsuarios = () => axios.get(USERS_ENDPOINT);
+export const getListaUsuarios = () => axios.get(ENDPOINT.USERS);
 
 export const deleteUsuarios = (userid) =>
-    axios.delete(`${USERS_ENDPOINT}${userid}`);
+    axios.delete(`${ENDPOINT.USERS}${userid}`);
 
-export const dadosUsuario = (editingUser, updatedUser) =>
-    axios.put(`${USERS_ENDPOINT}${editingUser.id}`, updatedUser);
+export const dadosUsuario = (id, updatedUser) =>
+    axios.put(`${ENDPOINT.USERS}${id}`, updatedUser);
+
+export const checkCEP = async (
+    e,
+    setLoading,
+    setValue,
+    setCepError,
+    isHookForm = false,
+) => {
+    const cep = e.target.value.replace(/\D/g, '');
+    if (!cep) {
+        return;
+    }
+    setLoading(true);
+    try {
+        const response = await getConsultaCep(cep);
+        const data = response.data;
+        if (data.erro) {
+            throw new Error('mensagem de erro!');
+        }
+        setValue('endereco', data.logradouro);
+        setValue('cidade', data.localidade);
+        setValue('uf', data.uf);
+        setCepError(null);
+        if (isHookForm) {
+            return {
+                endereco: data.logradouro,
+                cidade: data.localidade,
+                uf: data.uf,
+            };
+        }
+    } catch (error) {
+        console.error(error);
+        setLoading(false);
+        if (error.response && error.response.data && error.response.data.erro) {
+            setCepError('CEP inválido!');
+        } else {
+            setCepError('CEP inválido');
+        }
+    } finally {
+        setLoading(false);
+    }
+};

@@ -9,17 +9,15 @@ const useStyles = makeStyles({
     titulo: {
         textAlign: 'center',
         color: 'Black',
-        padding: '10px',
+        
     },
     button: {
         display: 'flex',
         justifyContent: 'center',
-        padding:'15px'
+        padding:'50px'
     },
 
-    margin: {
-     
-    },
+   
     
 });
 

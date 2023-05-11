@@ -1,11 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
+  
     root: {
         fontSize: '40px',
         lineHeight: '1.5em',
-        marginTop: '40px',
-        marginBottom: '10px',
+        marginTop: 'px',
+        marginBottom: '20px',
         },
 
       titulo: {
@@ -16,7 +17,8 @@ const useStyles = makeStyles({
         
       },
       button: {
-        justifyContent: 'center', marginBottom: '35px'
+        justifyContent: 'center',
+         marginBottom: '10px'
       },
      
     });
