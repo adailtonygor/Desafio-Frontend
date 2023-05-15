@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { postOnSubmit } from '../../services';
 import FormUsuario from '../FormUsuario/FormUsuario';
 import { useMemo } from 'react';
-import { schema } from '../FormUsuario/schema';
+import {schema} from '../FormUsuario/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // eslint-disable-next-line react/prop-types

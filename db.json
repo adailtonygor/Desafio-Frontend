@@ -1,15 +1,15 @@
 {
   "users": [
     {
-      "nome": "Kelly",
-      "cpf": "693.456.543-11",
-      "cep": "74937-300",
-      "endereco": "Rua H 131",
-      "cidade": "Aparecida de Goiânia",
-      "numero": "0",
-      "uf": "GO",
-      "nascimento": "2000-12-23",
+      "cep": "74937300",
       "sexo": "Masculino",
+      "nascimento": "2000-12-23",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "69345654311",
+      "nome": "Kelly",
       "id": 1
     },
     {
@@ -25,15 +25,15 @@
       "id": 2
     },
     {
-      "cep": "74937300",
-      "sexo": "Masculino",
-      "nascimento": "2001-02-22",
-      "uf": "GO",
-      "numero": "0",
-      "cidade": "Aparecida de Goiânia",
-      "endereco": "Rua H 131",
-      "cpf": "12345600012",
       "nome": "Patrick",
+      "cpf": "12345600012",
+      "cep": "74937300",
+      "endereco": "Rua H 131",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0",
+      "uf": "MG",
+      "nascimento": "2001-02-22",
+      "sexo": "Masculino",
       "id": 3
     },
     {
@@ -56,8 +56,8 @@
       "cidade": "Aparecida de Goiânia",
       "numero": "0",
       "uf": "GO",
-      "nascimento": "2012-05-12",
-      "sexo": "Masculino",
+      "nascimento": "2002-07-11",
+      "sexo": "Feminino",
       "id": 6
     },
     {
@@ -505,6 +505,42 @@
       "id": 44
     },
     {
+      "nome": "Adailton ",
+      "cpf": "70306472112",
+      "cep": "74937300",
+      "endereco": "Rua H 131",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0",
+      "uf": "BA",
+      "nascimento": "2000-07-11",
+      "sexo": "Masculino",
+      "id": 45
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2000-06-12",
+      "uf": "TO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "70306472112",
+      "nome": "Paulo ",
+      "id": 46
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2001-01-23",
+      "uf": "MS",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "70306472112",
+      "nome": "Felipe",
+      "id": 47
+    },
+    {
       "cep": "74937300",
       "sexo": "Masculino",
       "nascimento": "2000-07-11",
@@ -514,7 +550,103 @@
       "endereco": "Rua H 131",
       "cpf": "70306472112",
       "nome": "Adailton ",
-      "id": 45
+      "id": 49
+    },
+    {
+      "nome": "Katia ",
+      "cpf": "70306472112",
+      "cep": "74937300",
+      "endereco": "Rua H 131",
+      "cidade": "Aparecida de Goiânia",
+      "numero": "0",
+      "uf": "GO",
+      "nascimento": "2022-07-11",
+      "sexo": "Masculino",
+      "id": 52
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2000-07-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "70306472112",
+      "nome": "Adailton ",
+      "id": 53
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2000-07-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "70306472112",
+      "nome": "Adailton ",
+      "id": 58
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2000-07-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "58084142534",
+      "nome": "João ",
+      "id": 59
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2001-02-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "52569158003",
+      "nome": "Adailton ",
+      "id": 60
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2000-07-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "68228726040",
+      "nome": "Adailton ",
+      "id": 61
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2001-05-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "70306472112",
+      "nome": "Adailton ",
+      "id": 62
+    },
+    {
+      "cep": "74937300",
+      "sexo": "Masculino",
+      "nascimento": "2001-02-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "70306472112",
+      "nome": "Felipe",
+      "id": 63
     }
   ]
 }

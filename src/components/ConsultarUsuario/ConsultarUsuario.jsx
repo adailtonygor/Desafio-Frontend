@@ -108,7 +108,6 @@ const ConsultarUsuario = () => {
         setOpenDialog(false);
     };
 
-    
     const handleChangePage = (_event, newPage) => {
         const maxPage = Math.ceil(users.length / rowsPerPage) - 1;
         if (newPage >= 0 && newPage <= maxPage) {

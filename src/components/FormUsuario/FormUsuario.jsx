@@ -11,15 +11,16 @@ import {
     Button,
     CircularProgress,
     MenuItem,
+    Typography,
 } from '@material-ui/core';
 import { useFormContext } from 'react-hook-form';
 
 import useStyles from './Styles';
-import { checkCEP } from '../../services';
+import { checkCEP } from '../Hooks/Hooks';
 import { useState, useEffect } from 'react';
 import InputMask from 'react-input-mask';
 import { getConsultaUf } from '../../services';
-
+import { validateCPF } from '../ValidarCPF/validarCpf';
 // eslint-disable-next-line react/prop-types
 const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     const classes = useStyles();
@@ -27,12 +28,23 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     const [cepError, setCepError] = useState('');
     const [loading, setLoading] = useState(false);
     const [siglaUf, setSiglaUf] = useState([]);
+    const [isCPFValid, setIsCPFValid] = useState(true);
+    
+    const handleCPFChange = (event) => {
+        const cpf = event.target.value;
+        if (cpf) {
+            const isValid = validateCPF(cpf);
+            setIsCPFValid(isValid);
+        } else {
+            setIsCPFValid(true);
+        }
+    };
 
     const {
         register,
         setValue,
         getValues,
-        handleSubmit,
+        handleSubmit: handleFormSubmit,
         formState: { errors },
     } = useFormContext();
 
@@ -40,11 +52,24 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
         await checkCEP(e, setLoading, setValue, setCepError);
     };
 
+    const handleSubmit = (data) => {
+        if (!isCPFValid) {
+            return;
+        }
+        onSubmit(data);
+    };
+
     const fetchData = async () => {
         try {
             const response = await getConsultaUf();
             const data = response.data;
             setSiglaUf(data);
+            if (isEdicao) {
+                const ufValue = data.find((uf) => uf.sigla === getValues('uf'));
+                if (ufValue) {
+                    setValue('uf', ufValue.sigla);
+                }
+            }
         } catch (error) {
             console.error(error);
         }
@@ -57,13 +82,17 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     }, [siglaUf]);
 
     return (
-        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-            <h1 className={classes.titulo}>{isEdicao ? '' : 'Cadastro'}</h1>
-
+        <form
+            className={classes.form}
+            onSubmit={handleFormSubmit(handleSubmit)}
+        >
+            <Typography className={classes.titulo} variant="h3" gutterBottom>
+                {isEdicao ? '' : 'Cadastro'}
+            </Typography>
             <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
                     <TextField
-                    label='Nome'
+                        label="Nome"
                         type="text"
                         variant="outlined"
                         placeholder="Nome"
@@ -79,10 +108,14 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                         label="CPF"
                         variant="outlined"
                         {...register('cpf')}
-                        error={Boolean(errors.cpf)}
+                        error={Boolean(errors.cpf) || !isCPFValid}
                         defaultValue={getValues('cpf')}
-                        helperText={errors.cpf?.message}
+                        helperText={
+                            errors.cpf?.message ||
+                            (!isCPFValid && 'CPF inválido')
+                        }
                         fullWidth
+                        onBlur={handleCPFChange}
                         InputProps={{
                             inputComponent: InputMask,
                             inputProps: {
@@ -129,6 +162,9 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                         error={Boolean(errors.endereco)}
                         helperText={errors.endereco?.message}
                         fullWidth
+                        InputLabelProps={{
+                            shrink: Boolean(getValues('endereco')) || loading,
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -141,6 +177,9 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                         error={Boolean(errors.cidade)}
                         helperText={errors.cidade?.message}
                         fullWidth
+                        InputLabelProps={{
+                            shrink: Boolean(getValues('cidade')) || loading,
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -157,20 +196,22 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <FormControl fullWidth variant="outlined">
-                        <InputLabel shrink={Boolean(getValues('uf'))}>
-                            {Boolean(getValues('uf')) ? '' : 'UF'}
+                        <InputLabel htmlFor="outlined-age-native-simple" shrink={Boolean(getValues('uf')) } >
+                            UF
                         </InputLabel>
                         <Select
                             label="UF"
-                            id="demo-simple-select-outlined"
                             native
                             variant="outlined"
                             {...register('uf')}
-                            value={getValues('uf')}
+                           
                             onChange={(event) =>
                                 setValue('uf', event.target.value)
                             }
                             error={Boolean(errors.uf)}
+                            inputlabelprops={{
+                                id: 'outlined-age-native-simple',
+                            }}
                         >
                             <option value=""></option>
                             {siglaUf.sort().map((uf, index) => (
@@ -192,29 +233,18 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                         variant="outlined"
                         placeholder="Data de nascimento"
                         type="date"
-                        {...register('nascimento', {
-                            validate: {
-                                notFuture: (value) => {
-                                    const selectedDate = new Date(value);
-                                    const today = new Date();
-                                    today.setHours(0, 0, 0, 0);
-                                    return (
-                                        selectedDate <= today ||
-                                        'Data de nascimento não pode ser no futuro'
-                                    );
-                                },
-                            },
-                        })}
+                        {...register('nascimento')}
                         error={Boolean(errors.nascimento)}
                         fullWidth
-                        helperText={errors.nascimento?.message}
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        inputProps={{
-                            max: new Date().toISOString().slice(0, 10),
-                        }}
                     />
+                    {errors.nascimento && (
+                        <FormHelperText error>
+                            {errors.nascimento?.message}
+                        </FormHelperText>
+                    )}
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <FormControl
