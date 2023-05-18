@@ -8,22 +8,21 @@ import { useMemo } from 'react';
 import {schema} from '../FormUsuario/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-// eslint-disable-next-line react/prop-types
-const Cadastro = ({ isEdicao }) => {
+
+
+const Cadastro = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
-            // eslint-disable-next-line no-empty
-            if (isEdicao) {
-            } else {
-                await postOnSubmit(data);
-                navigate('/consultar-usuario');
-            }
+         
+            await postOnSubmit(data);
+            navigate('/consultar-usuario');
+          
         } catch (error) {
-            console.error(error);
+          console.error(error);
         }
-    };
+      };
 
     const validations = useMemo(() => schema(), []);
 

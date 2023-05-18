@@ -14,13 +14,13 @@ import {
     Typography,
 } from '@material-ui/core';
 import { useFormContext } from 'react-hook-form';
-
+import { Controller } from 'react-hook-form';
 import useStyles from './Styles';
 import { checkCEP } from '../Hooks/Hooks';
 import { useState, useEffect } from 'react';
 import InputMask from 'react-input-mask';
 import { getConsultaUf } from '../../services';
-import { validateCPF } from '../ValidarCPF/validarCpf';
+import { validateCPF } from '../../utils/validations.utils';
 // eslint-disable-next-line react/prop-types
 const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     const classes = useStyles();
@@ -29,7 +29,7 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     const [loading, setLoading] = useState(false);
     const [siglaUf, setSiglaUf] = useState([]);
     const [isCPFValid, setIsCPFValid] = useState(true);
-    
+
     const handleCPFChange = (event) => {
         const cpf = event.target.value;
         if (cpf) {
@@ -41,6 +41,7 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     };
 
     const {
+        control,
         register,
         setValue,
         getValues,
@@ -68,6 +69,12 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                 const ufValue = data.find((uf) => uf.sigla === getValues('uf'));
                 if (ufValue) {
                     setValue('uf', ufValue.sigla);
+                    const nascimento = new Date(getValues('nascimento'));
+                    nascimento.setDate(nascimento.getDate() - 1);
+                    setValue(
+                        'nascimento',
+                        nascimento.toISOString().split('T')[0],
+                    );
                 }
             }
         } catch (error) {
@@ -132,7 +139,7 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                         label="CEP"
                         variant="outlined"
                         {...register('cep')}
-                        error={Boolean(errors.cep)}
+                        error={Boolean(errors.cep) || Boolean(cepError)}
                         defaultValue={getValues('cep')}
                         helperText={errors.cep?.message || cepError}
                         fullWidth
@@ -153,33 +160,50 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField
-                        label="Endereço"
-                        type="text"
-                        variant="outlined"
-                        placeholder="Endereço"
-                        {...register('endereco')}
-                        error={Boolean(errors.endereco)}
-                        helperText={errors.endereco?.message}
-                        fullWidth
-                        InputLabelProps={{
-                            shrink: Boolean(getValues('endereco')) || loading,
-                        }}
+                    <Controller
+                        name="endereco"
+                        control={control}
+                        defaultValue={getValues('endereco') || ''}
+                        render={({ field }) => (
+                            <TextField
+                                label="Endereço"
+                                type="text"
+                                variant="outlined"
+                                placeholder="Endereço"
+                                {...field}
+                                error={Boolean(errors.endereco)}
+                                helperText={errors.endereco?.message}
+                                fullWidth
+                                InputLabelProps={{
+                                    shrink:
+                                        Boolean(getValues('endereco')) ||
+                                        loading,
+                                }}
+                            />
+                        )}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField
-                        label="Cidade"
-                        type="text"
-                        variant="outlined"
-                        placeholder="Cidade"
-                        {...register('cidade')}
-                        error={Boolean(errors.cidade)}
-                        helperText={errors.cidade?.message}
-                        fullWidth
-                        InputLabelProps={{
-                            shrink: Boolean(getValues('cidade')) || loading,
-                        }}
+                    <Controller
+                        name="cidade"
+                        control={control}
+                        defaultValue={getValues('cidade') || ''}
+                        render={({ field }) => (
+                            <TextField
+                                label="Cidade"
+                                type="text"
+                                variant="outlined"
+                                placeholder="Cidade"
+                                {...field}
+                                error={Boolean(errors.cidade)}
+                                helperText={errors.cidade?.message}
+                                fullWidth
+                                InputLabelProps={{
+                                    shrink:
+                                        Boolean(getValues('cidade')) || loading,
+                                }}
+                            />
+                        )}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -196,30 +220,33 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <FormControl fullWidth variant="outlined">
-                        <InputLabel htmlFor="outlined-age-native-simple" shrink={Boolean(getValues('uf')) } >
+                        <InputLabel id="demo-simple-select-outlined-label">
                             UF
                         </InputLabel>
-                        <Select
-                            label="UF"
-                            native
-                            variant="outlined"
-                            {...register('uf')}
-                           
-                            onChange={(event) =>
-                                setValue('uf', event.target.value)
-                            }
-                            error={Boolean(errors.uf)}
-                            inputlabelprops={{
-                                id: 'outlined-age-native-simple',
-                            }}
-                        >
-                            <option value=""></option>
-                            {siglaUf.sort().map((uf, index) => (
-                                <option key={index} value={uf.sigla}>
-                                    {uf.sigla}
-                                </option>
-                            ))}
-                        </Select>
+                        <Controller
+                            name="uf"
+                            control={control}
+                            defaultValue={getValues('uf') || ''}
+                            render={({ field }) => (
+                                <Select
+                                defaultValue={getValues('uf') || ''}
+                                    labelId="demo-simple-select-outlined-label"
+                                    variant="outlined"
+                                    id="demo-simple-select-outlined"
+                                    {...field}
+                                    error={Boolean(errors.uf)}
+                                    label="Uf"
+                                >
+                                    <option value=""></option>
+                                    {siglaUf.sort().map((uf, index) => (
+                                        <option key={index} value={uf.sigla}>
+                                            {uf.sigla}
+                                        </option>
+                                    ))}
+                                </Select>
+                            )}
+                        />
+
                         {errors.uf && (
                             <FormHelperText error>
                                 {errors.uf?.message}
@@ -255,18 +282,28 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                         <InputLabel id="demo-simple-select-outlined-label">
                             Sexo
                         </InputLabel>
-                        <Select
-                            labelId="demo-simple-select-outlined-label"
-                            variant="outlined"
-                            id="demo-simple-select-outlined"
-                            {...register('sexo')}
-                            defaultValue={getValues('sexo')}
-                            error={Boolean(errors.sexo)}
-                            label="Sexo"
-                        >
-                            <MenuItem value="Feminino">Feminino</MenuItem>
-                            <MenuItem value="Masculino">Masculino</MenuItem>
-                        </Select>
+                        <Controller
+                            name="sexo"
+                            control={control}
+                            defaultValue={getValues('sexo') || ''}
+                            render={({ field }) => (
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    variant="outlined"
+                                    id="demo-simple-select-outlined"
+                                    {...field}
+                                    error={Boolean(errors.sexo)}
+                                    label="Sexo"
+                                >
+                                    <MenuItem value="Feminino">
+                                        Feminino
+                                    </MenuItem>
+                                    <MenuItem value="Masculino">
+                                        Masculino
+                                    </MenuItem>
+                                </Select>
+                            )}
+                        />
                         {errors.sexo && (
                             <FormHelperText error>
                                 {errors.sexo?.message}

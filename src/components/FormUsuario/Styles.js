@@ -8,7 +8,7 @@ const useStyles = makeStyles({
 
     titulo: {
         textAlign: 'center',
-        color: 'Black',
+        
         padding:'15px' ,
         
     },

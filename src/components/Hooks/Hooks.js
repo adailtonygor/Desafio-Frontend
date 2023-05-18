@@ -1,5 +1,6 @@
 import { getConsultaCep } from "../../services";
 
+
 export const checkCEP = async (
     e,
     setLoading,
@@ -37,6 +38,7 @@ export const checkCEP = async (
         } else {
             setCepError('CEP inválido');
         }
+        
     } finally {
         setLoading(false);
     }
