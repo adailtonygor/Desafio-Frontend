@@ -1,13 +1,11 @@
-/* eslint-disable react/prop-types */
 import { Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 import useStyles from './Styles';
-
+import PropTypes from 'prop-types'
 import { FormProvider } from 'react-hook-form';
 import FormUsuario from '../FormUsuario/FormUsuario';
 
 const EditarUsuario = ({
     open,
-    onClose,
     handleSave,
     methods,
     onClickCancel,
@@ -15,7 +13,7 @@ const EditarUsuario = ({
     const classes = useStyles();
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="lg">
+        <Dialog open={open} maxWidth="lg">
             <DialogTitle className={classes.titulo}>Editar usuário</DialogTitle>
 
             <DialogContent className={classes.root}>
@@ -30,5 +28,12 @@ const EditarUsuario = ({
         </Dialog>
     );
 };
+
+EditarUsuario.propTypes = {
+    open: PropTypes.bool.isRequired,
+    handleSave: PropTypes.func.isRequired,
+    methods: PropTypes.object.isRequired,
+    onClickCancel: PropTypes.func.isRequired,
+  };
 
 export default EditarUsuario;

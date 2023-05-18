@@ -1,4 +1,3 @@
-/* eslint-disable no-extra-boolean-cast */
 import {
     Grid,
     TextField,
@@ -16,12 +15,13 @@ import {
 import { useFormContext } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import useStyles from './Styles';
-import { checkCEP } from '../Hooks/Hooks';
+import { usecheckCEP } from '../Hooks/Hooks';
 import { useState, useEffect } from 'react';
 import InputMask from 'react-input-mask';
 import { getConsultaUf } from '../../services';
 import { validateCPF } from '../../utils/validations.utils';
-// eslint-disable-next-line react/prop-types
+import PropTypes from 'prop-types';
+
 const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     const classes = useStyles();
 
@@ -29,6 +29,12 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     const [loading, setLoading] = useState(false);
     const [siglaUf, setSiglaUf] = useState([]);
     const [isCPFValid, setIsCPFValid] = useState(true);
+
+    FormUsuario.propTypes = {
+        isEdicao: PropTypes.bool,
+        onSubmit: PropTypes.func,
+        onClickCancel: PropTypes.func,
+    };
 
     const handleCPFChange = (event) => {
         const cpf = event.target.value;
@@ -50,7 +56,7 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
     } = useFormContext();
 
     const handleCheckCep = async (e) => {
-        await checkCEP(e, setLoading, setValue, setCepError);
+        await usecheckCEP(e, setLoading, setValue, setCepError);
     };
 
     const handleSubmit = (data) => {
@@ -69,12 +75,7 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                 const ufValue = data.find((uf) => uf.sigla === getValues('uf'));
                 if (ufValue) {
                     setValue('uf', ufValue.sigla);
-                    const nascimento = new Date(getValues('nascimento'));
-                    nascimento.setDate(nascimento.getDate() - 1);
-                    setValue(
-                        'nascimento',
-                        nascimento.toISOString().split('T')[0],
-                    );
+                   
                 }
             }
         } catch (error) {
@@ -229,7 +230,7 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                             defaultValue={getValues('uf') || ''}
                             render={({ field }) => (
                                 <Select
-                                defaultValue={getValues('uf') || ''}
+                                    defaultValue={getValues('uf') || ''}
                                     labelId="demo-simple-select-outlined-label"
                                     variant="outlined"
                                     id="demo-simple-select-outlined"
@@ -237,7 +238,6 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                                     error={Boolean(errors.uf)}
                                     label="Uf"
                                 >
-                                    <option value=""></option>
                                     {siglaUf.sort().map((uf, index) => (
                                         <option key={index} value={uf.sigla}>
                                             {uf.sigla}

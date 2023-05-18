@@ -1,7 +1,7 @@
 import { getConsultaCep } from "../../services";
 
 
-export const checkCEP = async (
+export const usecheckCEP = async (
     e,
     setLoading,
     setValue,
