@@ -85,15 +85,15 @@
       "id": 7
     },
     {
-      "nome": "ada",
-      "cpf": "703.064.721-12",
-      "cep": "74937-300",
-      "endereco": "Rua H 131",
-      "cidade": "Aparecida de Goiânia",
-      "numero": "0",
-      "uf": "GO",
-      "nascimento": "2000-05-12",
+      "cep": "74937300",
       "sexo": "Masculino",
+      "nascimento": "2000-05-12",
+      "uf": "GO",
+      "numero": "0",
+      "cidade": "Aparecida de Goiânia",
+      "endereco": "Rua H 131",
+      "cpf": "70306472112",
+      "nome": "Patrick",
       "id": 8
     },
     {
@@ -263,6 +263,18 @@
       "cpf": "70306472112",
       "nome": "Felipe",
       "id": 22
+    },
+    {
+      "cep": "01001000",
+      "sexo": "Feminino",
+      "nascimento": "2001-01-21",
+      "uf": "SP",
+      "numero": "",
+      "cidade": "São Paulo",
+      "endereco": "Praça da Sé",
+      "cpf": "02494208050",
+      "nome": "Aline",
+      "id": 23
     }
   ]
 }

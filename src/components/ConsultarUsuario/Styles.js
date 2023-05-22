@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  
     excluirUsuarioDialog: {
         fontSize: '18px',
         fontWeight: 'bold',
@@ -14,6 +13,20 @@ const useStyles = makeStyles({
 
     botoesExcluirUsuarioDialog: {
         justifyContent: 'center',
+    },
+
+    buscaAvancada: {
+        alignItems: 'center',
+        marginTop: '30px',
+    },
+
+    buscaPesquisa: {
+        height: '40px',
+        margin: '0 8px',
+    },
+   
+    tableUsuarios: {
+        marginTop: '30px',
     },
 });
 

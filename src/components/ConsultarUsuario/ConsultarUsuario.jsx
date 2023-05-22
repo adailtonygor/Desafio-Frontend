@@ -15,11 +15,18 @@ import {
     DialogActions,
     TablePagination,
     Snackbar,
+    TextField,
+    Select,
+    MenuItem,
 } from '@material-ui/core';
 import { Alert } from '@mui/material';
 import useStyles from './Styles';
 import EditarUsuario from '../EditarUsuario/EditarUsuario';
-import { dadosUsuario, deleteUsuarios, getListaUsuarios } from '../../services';
+import {
+    editarUsuario,
+    deleteUsuarios,
+    getListaUsuarios,
+} from '../../services';
 import { useForm } from 'react-hook-form';
 import { schema } from '../FormUsuario/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -32,16 +39,30 @@ const ConsultarUsuario = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [showMessage, setShowMessage] = useState(false);
     const [open, setOpen] = useState(false);
-    const [userid, setUserid] = useState(null);
+    const [cpf, setCpf] = useState(null);
+    const [searchTermo, setSearchTermo] = useState('');
+    const [searchTipo, setSearchTipo] = useState('nome');
+
     const classes = useStyles();
 
     useEffect(() => {
         const fetchUsers = async () => {
             const result = await getListaUsuarios();
-            setUsers(result.data);
+            
+            setUsers(result.content);
         };
         fetchUsers();
     }, []);
+
+    const handleSearchTermoChange = (event) => {
+        setSearchTermo(event.target.value);
+        setPage(0);
+    };
+    const handleSearchTipoChange = (event) => {
+        setSearchTipo(event.target.value);
+        setSearchTermo('');
+        setPage(0);
+    };
 
     const validations = useMemo(() => schema(), []);
 
@@ -51,8 +72,8 @@ const ConsultarUsuario = () => {
 
     const { setValue } = methods;
 
-    const handleClickOpen = (id) => {
-        setUserid(id);
+    const handleClickOpen = (cpf) => {
+        setCpf(cpf);
         setOpen(true);
     };
 
@@ -61,8 +82,8 @@ const ConsultarUsuario = () => {
     };
 
     const handleDelete = async () => {
-        await deleteUsuarios(userid);
-        const excluirUsuario = users.filter((usuario) => usuario.id !== userid);
+        await deleteUsuarios(cpf);
+        const excluirUsuario = users.filter((usuario) => usuario.cpf !== cpf);
         setUsers([...excluirUsuario]);
         setOpen(false);
     };
@@ -85,7 +106,7 @@ const ConsultarUsuario = () => {
 
     const handleSave = async (data) => {
         try {
-            await dadosUsuario(editingUser.id, data);
+            await editarUsuario(editingUser.cpf, data);
 
             setShowMessage(true);
             setEditingUser(null);
@@ -93,9 +114,13 @@ const ConsultarUsuario = () => {
             setUsers((prevUsers) => {
                 const updatedUsers = [...prevUsers];
                 const userIndex = prevUsers.findIndex(
-                    (user) => user.id === editingUser.id,
+                    (user) => user.cpf === editingUser.cpf,
                 );
-                updatedUsers[userIndex] = { ...data, id: editingUser.id };
+                updatedUsers[userIndex] = {
+                    ...data,
+                    id: editingUser.id,
+                    cpf: editingUser.cpf,
+                };
                 return updatedUsers;
             });
         } catch (error) {
@@ -123,7 +148,42 @@ const ConsultarUsuario = () => {
     return (
         <div>
             <TableContainer>
-                <Table>
+                <Grid
+                    container
+                    justifyContent="center"
+                    className={classes.buscaAvancada}
+                >
+                    <Grid item xs={2}>
+                        <TextField
+                            label="Pesquisar"
+                            value={searchTermo}
+                            onChange={handleSearchTermoChange}
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Select
+                            value={searchTipo}
+                            onChange={handleSearchTipoChange}
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                            className={classes.buscaPesquisa}
+                        >
+                            <MenuItem value="nome">Nome</MenuItem>
+                            <MenuItem value="cpf">CPF</MenuItem>
+                            <MenuItem value="nascimento">
+                                Data de Nascimento
+                            </MenuItem>
+                            <MenuItem value="sexo">Sexo</MenuItem>
+                            <MenuItem value="uf">UF</MenuItem>
+                            <MenuItem value="cidade">Cidade</MenuItem>
+                        </Select>
+                    </Grid>
+                </Grid>
+                <Table className={classes.tableUsuarios}>
                     <TableHead>
                         <TableRow>
                             <TableCell>ID</TableCell>
@@ -140,12 +200,77 @@ const ConsultarUsuario = () => {
                     </TableHead>
                     <TableBody>
                         {users
+                            .filter((user) => {
+                                if (searchTermo) {
+                                    switch (searchTipo) {
+                                        case 'nome':
+                                            if (
+                                                !user.nome
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        searchTermo.toLowerCase(),
+                                                    )
+                                            ) {
+                                                return false;
+                                            }
+                                            break;
+                                        case 'cpf':
+                                            if (
+                                                !user.cpf
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        searchTermo.toLowerCase(),
+                                                    )
+                                            ) {
+                                                return false;
+                                            }
+                                            break;
+
+                                        case 'sexo':
+                                            if (
+                                                !user.sexo
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        searchTermo.toLowerCase(),
+                                                    )
+                                            ) {
+                                                return false;
+                                            }
+                                            break;
+                                        case 'uf':
+                                            if (
+                                                !user.uf
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        searchTermo.toLowerCase(),
+                                                    )
+                                            ) {
+                                                return false;
+                                            }
+                                            break;
+                                        case 'cidade':
+                                            if (
+                                                !user.cidade
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        searchTermo.toLowerCase(),
+                                                    )
+                                            ) {
+                                                return false;
+                                            }
+                                            break;
+                                        default:
+                                            return true;
+                                    }
+                                }
+                                return true;
+                            })
                             .slice(
                                 page * rowsPerPage,
                                 page * rowsPerPage + rowsPerPage,
                             )
-                            .map((user) => (
-                                <TableRow key={user.id}>
+                            .map((user, index) => (
+                                <TableRow key={`${user.id}-${index}`}>
                                     <TableCell>{user.id}</TableCell>
                                     <TableCell>{user.nome}</TableCell>
                                     <TableCell>{user.cpf}</TableCell>
@@ -178,7 +303,9 @@ const ConsultarUsuario = () => {
                                                     variant="outlined"
                                                     color="secondary"
                                                     onClick={() =>
-                                                        handleClickOpen(user.id)
+                                                        handleClickOpen(
+                                                            user.cpf,
+                                                        )
                                                     }
                                                 >
                                                     Excluir

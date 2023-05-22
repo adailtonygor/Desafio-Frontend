@@ -246,7 +246,7 @@ const FormUsuario = ({ isEdicao, onSubmit, onClickCancel }) => {
                                 </Select>
                             )}
                         />
-
+                        
                         {errors.uf && (
                             <FormHelperText error>
                                 {errors.uf?.message}
