@@ -48,7 +48,7 @@ const ConsultarUsuario = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             const result = await getListaUsuarios();
-            
+
             setUsers(result.content);
         };
         fetchUsers();
@@ -88,8 +88,8 @@ const ConsultarUsuario = () => {
         setOpen(false);
     };
 
-    const handleEdit = (id) => {
-        const user = users.find((user) => user.id === id);
+    const handleEdit = (cpf) => {
+        const user = users.find((user) => user.cpf === cpf);
         setValue('nome', user?.nome);
         setValue('cpf', user?.cpf);
         setValue('cep', user?.cep);
@@ -186,7 +186,6 @@ const ConsultarUsuario = () => {
                 <Table className={classes.tableUsuarios}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
                             <TableCell>Nome</TableCell>
                             <TableCell>CPF</TableCell>
                             <TableCell>Endereço</TableCell>
@@ -271,7 +270,6 @@ const ConsultarUsuario = () => {
                             )
                             .map((user, index) => (
                                 <TableRow key={`${user.id}-${index}`}>
-                                    <TableCell>{user.id}</TableCell>
                                     <TableCell>{user.nome}</TableCell>
                                     <TableCell>{user.cpf}</TableCell>
                                     <TableCell>{user.endereco}</TableCell>
@@ -292,7 +290,7 @@ const ConsultarUsuario = () => {
                                                     variant="outlined"
                                                     color="primary"
                                                     onClick={() =>
-                                                        handleEdit(user.id)
+                                                        handleEdit(user.cpf)
                                                     }
                                                 >
                                                     Editar

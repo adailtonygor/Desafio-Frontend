@@ -1,5 +1,6 @@
 module.exports = {
-    env: { browser: true },
+    presets: [['@babel/preset-env', { targets: { esmodules: true } }]],
+    env: { browser: true, jest: true },
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',

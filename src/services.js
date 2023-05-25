@@ -26,12 +26,10 @@ export const getListaUsuarios = async () => {
         );
 };
 
-export const deleteUsuarios = (cpf) =>
-    axios.delete(`${ENDPOINT.USERS}${cpf}`);
-
+export const deleteUsuarios = (cpf) => axios.delete(`${ENDPOINT.USERS}${cpf}`);
 
 export const editarUsuario = (cpf, updatedUser) =>
-    axios.put(`${ENDPOINT.USERS}${cpf}`,mapperToBackend(updatedUser));
+    axios.put(`${ENDPOINT.USERS}${cpf}`, mapperToBackend(updatedUser));
 
 const mapperToBackend = (data) => {
     data = {
