@@ -30,6 +30,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { schema } from '../FormUsuario/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { filterUsers } from '../Hooks/Hooks';
 
 const ConsultarUsuario = () => {
     const [users, setUsers] = useState([]);
@@ -145,6 +146,11 @@ const ConsultarUsuario = () => {
         setPage(0);
     };
 
+    function formatarCPFTela(cpf) {
+        const cpfFormatado = cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+        return cpfFormatado;
+      }
+
     return (
         <div>
             <TableContainer>
@@ -198,72 +204,7 @@ const ConsultarUsuario = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {users
-                            .filter((user) => {
-                                if (searchTermo) {
-                                    switch (searchTipo) {
-                                        case 'nome':
-                                            if (
-                                                !user.nome
-                                                    .toLowerCase()
-                                                    .includes(
-                                                        searchTermo.toLowerCase(),
-                                                    )
-                                            ) {
-                                                return false;
-                                            }
-                                            break;
-                                        case 'cpf':
-                                            if (
-                                                !user.cpf
-                                                    .toLowerCase()
-                                                    .includes(
-                                                        searchTermo.toLowerCase(),
-                                                    )
-                                            ) {
-                                                return false;
-                                            }
-                                            break;
-
-                                        case 'sexo':
-                                            if (
-                                                !user.sexo
-                                                    .toLowerCase()
-                                                    .includes(
-                                                        searchTermo.toLowerCase(),
-                                                    )
-                                            ) {
-                                                return false;
-                                            }
-                                            break;
-                                        case 'uf':
-                                            if (
-                                                !user.uf
-                                                    .toLowerCase()
-                                                    .includes(
-                                                        searchTermo.toLowerCase(),
-                                                    )
-                                            ) {
-                                                return false;
-                                            }
-                                            break;
-                                        case 'cidade':
-                                            if (
-                                                !user.cidade
-                                                    .toLowerCase()
-                                                    .includes(
-                                                        searchTermo.toLowerCase(),
-                                                    )
-                                            ) {
-                                                return false;
-                                            }
-                                            break;
-                                        default:
-                                            return true;
-                                    }
-                                }
-                                return true;
-                            })
+                    {filterUsers(users, searchTermo, searchTipo)
                             .slice(
                                 page * rowsPerPage,
                                 page * rowsPerPage + rowsPerPage,
@@ -271,7 +212,7 @@ const ConsultarUsuario = () => {
                             .map((user, index) => (
                                 <TableRow key={`${user.id}-${index}`}>
                                     <TableCell>{user.nome}</TableCell>
-                                    <TableCell>{user.cpf}</TableCell>
+                                    <TableCell>{formatarCPFTela(user.cpf)}</TableCell>
                                     <TableCell>{user.endereco}</TableCell>
                                     <TableCell>{user.cep}</TableCell>
                                     <TableCell>{user.cidade}</TableCell>
