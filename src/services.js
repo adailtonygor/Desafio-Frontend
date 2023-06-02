@@ -31,7 +31,7 @@ export const deleteUsuarios = (cpf) => axios.delete(`${ENDPOINT.USERS}${cpf}`);
 export const editarUsuario = (cpf, updatedUser) =>
     axios.put(`${ENDPOINT.USERS}${cpf}`, mapperToBackend(updatedUser));
 
-const mapperToBackend = (data) => {
+export const mapperToBackend = (data) => {
     data = {
         ...data,
         endereco: {
@@ -48,7 +48,7 @@ const mapperToBackend = (data) => {
     return data;
 };
 
-const mapperToFrontend = (dto) => {
+export const mapperToFrontend = (dto) => {
     const endereco = dto.endereco;
 
     const data = {

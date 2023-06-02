@@ -30,7 +30,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { schema } from '../FormUsuario/schema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { filterUsers } from '../Hooks/Hooks';
+import { filterUsers } from './services/getFromData';
 
 const ConsultarUsuario = () => {
     const [users, setUsers] = useState([]);
@@ -146,10 +146,8 @@ const ConsultarUsuario = () => {
         setPage(0);
     };
 
-    function formatarCPFTela(cpf) {
-        const cpfFormatado = cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
-        return cpfFormatado;
-      }
+    const formatarCPFTela = (cpf) =>
+        cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
 
     return (
         <div>
@@ -204,7 +202,7 @@ const ConsultarUsuario = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {filterUsers(users, searchTermo, searchTipo)
+                        {filterUsers(users, searchTermo, searchTipo)
                             .slice(
                                 page * rowsPerPage,
                                 page * rowsPerPage + rowsPerPage,
@@ -212,7 +210,9 @@ const ConsultarUsuario = () => {
                             .map((user, index) => (
                                 <TableRow key={`${user.id}-${index}`}>
                                     <TableCell>{user.nome}</TableCell>
-                                    <TableCell>{formatarCPFTela(user.cpf)}</TableCell>
+                                    <TableCell>
+                                        {formatarCPFTela(user.cpf)}
+                                    </TableCell>
                                     <TableCell>{user.endereco}</TableCell>
                                     <TableCell>{user.cep}</TableCell>
                                     <TableCell>{user.cidade}</TableCell>

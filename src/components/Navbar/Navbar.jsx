@@ -1,10 +1,13 @@
 /* eslint-disable react/no-unknown-property */
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
+import useStyles from './Styles';
 
 function NavBar() {
     const [setActive] = useState(false);
+    const classes = useStyles();
+    const location = useLocation();
 
     const handleClick = () => {
         setActive(true);
@@ -16,35 +19,29 @@ function NavBar() {
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Toolbar className={classes.root}>
                 <NavLink
                     to="/"
                     onClick={handleClick}
                     onBlur={handleBlur}
-                    style={({ isActive, isPending }) => {
-                        return {
-                            fontWeight: isActive ? 'Bold' : '',
-                            color: isPending ? 'white' : 'white',
-                            textDecoration: 'none',
-                        };
-                    }}
+                    className={`${classes.title} ${classes.link} ${
+                        location.pathname === '/' ? classes.activeLink : ''
+                    }`}
+                    exact
                 >
                     Desafio Nova
                 </NavLink>
 
-                <div sx={{ marginRight: 'auto' }}>
+                <div className={classes.rightSection}>
                     <NavLink
                         to="/cadastro"
                         onClick={handleClick}
                         onBlur={handleBlur}
-                        style={({ isActive, isPending }) => {
-                            return {
-                                fontWeight: isActive ? 'Bold' : '',
-                                color: isPending ? 'white' : 'white',
-                                textDecoration: 'none',
-                                margin: '0 10px',
-                            };
-                        }}
+                        className={`${classes.link} ${
+                            location.pathname === '/cadastro'
+                                ? classes.activeLink
+                                : ''
+                        }`}
                     >
                         Cadastro
                     </NavLink>
@@ -52,13 +49,11 @@ function NavBar() {
                         to="/consultar-usuario"
                         onClick={handleClick}
                         onBlur={handleBlur}
-                        style={({ isActive, isPending }) => {
-                            return {
-                                fontWeight: isActive ? 'Bold' : '',
-                                color: isPending ? 'white' : 'white',
-                                textDecoration: 'none',
-                            };
-                        }}
+                        className={`${classes.link} ${
+                            location.pathname === '/consultar-usuario'
+                                ? classes.activeLink
+                                : ''
+                        }`}
                     >
                         Usuário
                     </NavLink>
