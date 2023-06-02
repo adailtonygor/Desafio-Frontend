@@ -26,19 +26,19 @@ Para iniciar o projeto realize o comando 'npm run dev'.
 Estou utilizando uma Api Fake nesse Desafio. Para iniciar utilize o comando 'json-server --watch db.json'
 
 
-![image](https://user-images.githubusercontent.com/105685493/233464313-cb6478cb-62d0-408d-978c-8e39d64d0fda.png)
+![image](https://github.com/adailtonygor/Desafio-Frontend/assets/105685493/403291f3-55e8-4e8c-8f8c-51933a4210e2)
 
 
 
-![image](https://user-images.githubusercontent.com/105685493/236308912-269e9031-7ef2-45f4-9dec-ac0839645a42.png)
+![image](https://github.com/adailtonygor/Desafio-Frontend/assets/105685493/00b10319-6d7f-4b7e-8032-6385ae49e914)
 
 
-![image](https://user-images.githubusercontent.com/105685493/236309206-48997e0a-25f7-4358-af1a-dfd801a5705d.png)
+![image](https://github.com/adailtonygor/Desafio-Frontend/assets/105685493/65031696-232d-4268-8767-4e37c50a7a4c)
 
-![image](https://user-images.githubusercontent.com/105685493/236309361-6e83aafc-1042-4b49-aaac-c1d080d24bcb.png)
+![image](https://github.com/adailtonygor/Desafio-Frontend/assets/105685493/6dc2f3de-094b-4c7a-a76c-15d366e0b8b5)
 
 
 
-![image](https://user-images.githubusercontent.com/105685493/236310802-22220950-a6b1-497f-a7fe-8acd86c3e12b.png)
+![image](https://github.com/adailtonygor/Desafio-Frontend/assets/105685493/feac1d2b-a1d2-4452-a664-e61e1d01fa01)
 
 
